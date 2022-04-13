@@ -18,7 +18,7 @@ use App\Http\Controllers\IndexController;
 */
 
 // Route::get('/', function () {
-//     return Inertia::render('Welcome', [
+//     return Inertia::render('-Welcome', [
 //         'canLogin' => Route::has('login'),
 //         'canRegister' => Route::has('register'),
 //         'laravelVersion' => Application::VERSION,
@@ -31,9 +31,9 @@ use App\Http\Controllers\IndexController;
 //     config('jetstream.auth_session'),
 //     'verified',
 // ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return Inertia::render('Dashboard');
-//     })->name('dashboard');
+//     Route::get('/', function () {
+//         return Inertia::render('Index');
+//     })->name('Index');
 // });
 
 Route::get('/',        [IndexController::class, 'index']);

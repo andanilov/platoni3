@@ -19,6 +19,8 @@ export default {
         FooterBar
     },
 
+    props : { currentUser: Object },
+
     setup() {
 
         return {
