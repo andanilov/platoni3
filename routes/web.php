@@ -26,16 +26,25 @@ use App\Http\Controllers\IndexController;
 //     ]);
 // });
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified',
-// ])->group(function () {
-//     Route::get('/', function () {
-//         return Inertia::render('Index');
-//     })->name('Index');
-// });
+
+// --- Users
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+
+    Route::get('/Profile', function () {
+        return Inertia::render('Profile', [
+            'user' => Auth::user()
+        ]);
+    })->name('Profile');
+
+});
+
+
+// --- Guests
 
 Route::get('/',        [IndexController::class, 'index']);
-// Route::get('/Games',   [GamesController, 'index']);
-// Route::get('/Quests',  [QuestsController, 'index']);
+Route::get('/login',        [IndexController::class, 'index'])->name('login');

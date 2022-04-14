@@ -1,8 +1,15 @@
 <template>
 
     <div v-if="currentUser">
-        {{ currentUser.name ?? currentUser.email }}
-        <button @click="out">Выход</button>
+        <dropdown-menu 
+            :title="currentUser.name ?? currentUser.email"
+            side="right">
+            <ul class="leading-8">
+                <li><Link href="/Profile">Профиль</Link></li>
+                <li><hr></li>
+                <li><a href="#" @click="out">Выход</a></li>
+            </ul>
+        </dropdown-menu>
     </div>
 
     <div v-else>
@@ -30,6 +37,7 @@
 
 <script>
 import ModalWin from '@/components/ModalWin'
+import DropdownMenu from '@/components/DropdownMenu'
 import Login from '@/Pages/Auth/Login'
 import Register from '@/Pages/Auth/Register'
 
@@ -44,8 +52,8 @@ import { useToggle } from '@/use/Toggle'
 export default {
 
     components: {
-        ModalWin,
-        Login, Register, Inertia
+        ModalWin, DropdownMenu,
+        Login, Register, Inertia, Link
     },
 
     // methods: {
