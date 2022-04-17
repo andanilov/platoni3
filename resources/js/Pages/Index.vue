@@ -1,39 +1,56 @@
 <template>
 
     <wrapper-page :currentUser="currentUser">
-        <h1>Index</h1>
-        <!-- USER : {{ user }}<br/><br/> -->
-        <!-- CURRENT : {{ currentUser }} -->
+        <div class="flex flex-col-reverse">         
+            <levels-output :questsModel="questsModel"/>                   
+        </div>
     </wrapper-page>
 
 </template>
 
-<script>
-import WrapperPage from '@/components/WrapperPage.vue'
-import { useGetUser } from '@/use/GetUser.js'
+<script setup>
 import { computed, onMounted } from 'vue'
 
-export default {
+import WrapperPage from '@/components/WrapperPage.vue'
+import LevelsOutput from '@/components/LevelsOutput'
 
-    components : {
-        WrapperPage
-    },
+import { useGetUser } from '@/use/GetUser.js'
 
-    props : {
-        user : Object
-    },
 
-    setup(props) {
+const props = defineProps({
+  user : Object,  
+})
 
-        // const currentUser = computed(() => useGetUser(props.user))
 
-        // computed(() => {
-        //     useGetUser(props.user)
-        // })
+// -- Get and update current user 
+const currentUser = computed(() => useGetUser(props.user))
+computed(() => { useGetUser(props.user) })
 
-        return {
-            currentUser : computed(() => useGetUser(props.user))
-        }
-    },
+
+
+// -- Get quests
+
+const questsModel = {
+
+    1 : { disabledReason : '', quests : {
+            addition2 :     { title: '+', link : '/', progress : 2, levels : 4},
+        }},
+    2 : { disabledReason : '', quests : {
+            addition2 :     { title: '+', link : '/', progress : 1, levels : 4},
+            subtraction2 :  { title: '-', link : '/', progress : 2, levels : 5},
+        }},
+    3 : { disabledReason : '', quests : {
+            addition2 :     { title: '+', link : '/', progress : 1, levels : 3},
+            subtraction2 :  { title: '-', link : '/', progress : 1, levels : 3},
+            multiply2 :  { title: '+-', link : '/', progress : 1, levels : 3},
+        }},
+    4 : { disabledReason : '', quests : {  
+            addition2 :     { title: '+', link : '/', progress : 1, levels : 3},
+            subtraction2 :  { title: '-', link : '/', progress : 2, levels : 3},
+            multiply2 :     { title: '+-', link : '/', progress : 1, levels : 5},
+            multiply3skip :  { title: '+?-', link : '/', progress : 1, levels : 3},
+        }},
+
 }
+
 </script>
