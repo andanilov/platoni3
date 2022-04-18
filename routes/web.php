@@ -47,4 +47,7 @@ Route::middleware([
 // --- Guests
 
 Route::get('/',        [IndexController::class, 'index']);
-Route::get('/login',        [IndexController::class, 'index'])->name('login');
+Route::get('/login',   [IndexController::class, 'index'])->name('login');
+
+
+

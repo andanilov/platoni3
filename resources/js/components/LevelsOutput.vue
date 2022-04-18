@@ -13,10 +13,9 @@
         <div class="flex justify-center flex-wrap">
 
             <quest-output
-            v-for="(quest, questId) in quests.quests"
-            :key="'quest' + questId"
-            :questId="questId"
-            :quest="quest"                     
+            v-for="quest in quests"
+            :quest="quest" 
+            :key="questsId + quest.questName"                    
             />
 
         </div>
