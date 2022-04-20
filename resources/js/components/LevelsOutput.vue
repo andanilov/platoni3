@@ -9,13 +9,13 @@
         :progress="6"
         :all="10"
         />
-        
+
         <div class="flex justify-center flex-wrap">
 
             <quest-output
             v-for="quest in quests"
-            :quest="quest" 
-            :key="questsId + quest.questName"                    
+            :quest="quest"
+            :key="questsId + quest.questName"
             />
 
         </div>
@@ -29,5 +29,8 @@ import LevelTitle from '@/components/LevelTitle'
 
 
 const props = defineProps({ questsModel : Object })
+
+
+
 
 </script>

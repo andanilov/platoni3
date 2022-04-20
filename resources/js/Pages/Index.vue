@@ -1,14 +1,10 @@
 <template>
 
     <wrapper-page :currentUser="currentUser">
-        <div class="flex flex-col-reverse">         
-            <levels-output :questsModel="questsMap"/>                   
+        <div class="flex flex-col-reverse">
+            <levels-output :questsModel="questsMap"/>
         </div>
     </wrapper-page>
-
-<pre>
-{{ questsMap }}
-</pre>
 
 </template>
 
@@ -23,11 +19,11 @@ import { useQuestsMap } from'@/use/QuestsMap'
 
 
 const props = defineProps({
-  user : Object,  
-}) 
+  user : Object,
+})
 
 
-// -- Get and update current user 
+// -- Get and update current user
 const currentUser = computed(() => useGetUser(props.user))
 computed(() => { useGetUser(props.user) })
 
@@ -66,7 +62,7 @@ const questsMap = useQuestsMap()
     //         subtraction2 :  { title: '-', link : '/', progress : 1, levels : 3},
     //         multiply2 :  { title: '+-', link : '/', progress : 1, levels : 3},
     //     }},
-    // 4 : { disabledReason : '', quests : {  
+    // 4 : { disabledReason : '', quests : {
     //         addition2 :     { title: '+', link : '/', progress : 1, levels : 3},
     //         subtraction2 :  { title: '-', link : '/', progress : 2, levels : 3},
     //         multiply2 :     { title: '+-', link : '/', progress : 1, levels : 5},

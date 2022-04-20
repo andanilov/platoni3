@@ -1,6 +1,6 @@
 <template>
 
-    <svg version="1.1" viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    <svg version="1.1" :viewBox="`0 0 ${viewBox} ${viewBox}`"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         v-html="path"
         :width="width"
         :height="height"
@@ -13,17 +13,19 @@ import Icons from '@/icons'
 
 export default {
     props : {
-        name : String,
-        width: String,
+        name    : String,
+        width   : String,
+        height  : String,
     },
 
     setup(props) {
 
-        const width = props.width ?? 36
+        const width = props.width ?? '1em'
         const height = props.height ?? width
 
         return {
-            path: Icons[props.name],
+            path: Icons[props.name].path,
+            viewBox: Icons[props.name].viewBox,
             width, height
         }
     },

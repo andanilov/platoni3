@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\QuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::middleware([
 
 Route::get('/',        [IndexController::class, 'index']);
 Route::get('/login',   [IndexController::class, 'index'])->name('login');
+Route::get('/quest',   [QuestController::class, 'index'])->name('quest');
 
 
 
