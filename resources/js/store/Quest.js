@@ -6,6 +6,7 @@ const Quest = {
 
     state: () => ({
         tasks       : {},
+        tasksCount  : 0,
 
         time        : 30,
         currentTime : ref(),
@@ -32,6 +33,7 @@ const Quest = {
         setStatus       : (state, newVal = 'wait')  => { state.status = newVal },
         setStopTimer    : (state, newFunc)          => { state.stopTimer = newFunc },
         setTasks        : (state, newVal)           => { state.tasks = newVal },
+        setTasksCount   : (state, newVal)           => { state.tasksCount = newVal },
         setAnswers      : (state, newVal)           => { state.answers = newVal },
         setMistakes     : (state, newVal)           => { state.mistakes = newVal },
         setInputArea    : (state, newVal)           => { state.inputArea = newVal },

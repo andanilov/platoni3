@@ -1,20 +1,31 @@
 <template>
 
-    <div class="grid grid-cols-3">
-        <input-button
-        v-for="but in buttonsModel"
-        :key="`inputBut-${but}`"
-        :press="() => { but === 'del' ? deleteInput() : addInput(but) }"
-        >
-            {{ but }}
-        </input-button>
+    <div class="grid grid-cols-3 mx-auto
+    w-fit
+    ">
+
+            <button class="w-[6rem] text-[3em] font-bold
+             bg-stone-50 text-gray-500 hover:bg-stone-200 active:bg-stone-50
+            mx-auto rounded-xl shadow-sm border-2 aspect-square"
+            style="margin: .5rem"
+            :disabled="taskStatus != 'wait'"
+            v-for="but in buttonsModel"
+            :key="`inputBut-${but}`"
+            @click="but === 'del' ? deleteInput() : addInput(but)">
+                {{ but === 'del' ? '×' : but }}
+            </button>
+
     </div>
 
 </template>
 
 <script setup>
 import { useQuest } from '@/use/Quest'
-import InputButton from '@/components/InputButton'
 
-const { buttonsModel, addInput, deleteInput } = useQuest()
+const {
+    buttonsModel,
+    addInput,
+    deleteInput,
+    taskStatus,
+} = useQuest()
 </script>

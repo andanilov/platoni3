@@ -1,6 +1,6 @@
 <template>
 
-<div class="max-w-5xl mx-auto p-3">
+<div class="max-w-3xl mx-auto p-3">
     <quest-panel/>
     <input-area/>
     <input-buttons/>

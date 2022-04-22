@@ -1,43 +1,30 @@
 <template>
 
+    <div class=" grid mx-auto mt-5 px-5">
 
-<div class=""
-v-if="taskStatus === 'right'">
+        <button class="rounded-lg py-2 shadow-sm text-[1.5rem] uppercase tracking-wider
+        bg-lime-500 text-white"
+        v-if="taskStatus === 'right'"
+        @click="setNextTask()">
+            Далее
+        </button>
 
-    <button class="w-full"
-    @click="setNextTask()">
-        Далее
-    </button>
+        <button class="rounded-lg py-2 shadow-sm text-[1.5rem] uppercase tracking-wider
+         bg-red-400 text-white"
+        v-else-if="taskStatus === 'wrong'"
+        @click="setNextTask()">
+            Далее
+        </button>
 
-</div>
+        <button class="rounded-lg py-2 shadow-sm text-[1.5rem] uppercase tracking-wider
+        bg-lime-500 text-white"
+        v-else
+        @click="checkAnswer()">
+            Ответить
+        </button>
 
-<div class=""
-v-else-if="taskStatus === 'wrong'">
+    </div>
 
-    <button class="w-full"
-    @click="setNextTask()">
-        Далее
-    </button>
-
-</div>
-
-<div class=""
-v-else>
-
-    <button class="w-full"
-    @click="checkAnswer()">
-        Ответить
-    </button>
-
-</div>
-
-
-<pre>
-    tasks: {{ tasks }}
-    answers: {{ answers }}
-    mistakes: {{ mistakes }}
-    currentTask: {{ currentTask }}
-</pre>
 
 </template>
 

@@ -22,6 +22,9 @@ export function useQuest(init = false) {
             store.commit('Quest/setInputArea', currentTask.task)
             store.commit('Quest/setTasks', tasks)
 
+            // Clear input area
+            deleteInput(true)
+
             // Start timer
             timerStart()
 
@@ -51,7 +54,7 @@ export function useQuest(init = false) {
 
             const $questInput = document.getElementById(inputId)
 
-            if($questInput.innerHTML.length === 0)
+            if(!$questInput || $questInput.innerHTML.length === 0)
                 return
 
             let newInput = all ? '' : $questInput.innerHTML.substring(0, $questInput.innerHTML.length - 1)
@@ -86,8 +89,6 @@ export function useQuest(init = false) {
             // Check is there the end
             isTheEnd()
 
-            // Clear input area
-            deleteInput(true)
 
         }
 
@@ -143,7 +144,7 @@ export function useQuest(init = false) {
         // -- get Quest
         const questModel = {
             idQuestTpl  : 10,
-            time       : 10,
+            time       : 100,
             tasks      : [
                 { task : '3+5=_', correct : '8' },
                 { task : '1+7=_', correct : '8' },
@@ -158,6 +159,9 @@ export function useQuest(init = false) {
 
         // -- Tasks
         store.commit('Quest/setTasks', questModel.tasks)
+
+        // -- Tasks count
+        store.commit('Quest/setTasksCount', questModel.tasks.length)
 
         // -- Answers
         store.commit('Quest/setAnswers', [])
@@ -191,6 +195,11 @@ export function useQuest(init = false) {
         currentTime:    computed( () => STORE.currentTime ),
         taskStatus:     computed( () => STORE.status ),
         allLives:       STORE.lives,
+        allTasks:       STORE.tasksCount,
+
+        taskProgress:   computed( () => +((STORE.answers.length + STORE.mistakes.length) * 100 / STORE.tasksCount ) ),
+        passed:         computed( () => STORE.answers.length + STORE.mistakes.length ),
+        left:           computed( () => STORE.tasksCount - STORE.answers.length - STORE.mistakes.length ),
 
         setNextTask,
         addInput,

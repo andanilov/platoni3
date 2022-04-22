@@ -1,4 +1,4 @@
-export function useGradientProgress(percent = 0, color = '#a3e635', bg = '#f5f5f4') {
+export function useGradientProgress(percent = 0, color = 'rgb(132 204 22)', bg = 'rgb(245 245 245)') {
 
     return `linear-gradient(90deg, ${color} 0 ${percent}%, ${bg} ${percent}% 100%)`
 
