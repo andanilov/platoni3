@@ -1,7 +1,7 @@
 import { useStore } from 'vuex'
 import { computed, ref } from 'vue'
 
-export function useQuest(init = false) {
+export function useQuest(initQuest = false) {
 
     const store     = useStore()
     const STORE     = store.state.Quest
@@ -139,19 +139,12 @@ export function useQuest(init = false) {
 
     // -- First call (initialisation)
 
-    if(init) {
+    if(initQuest) {
 
         // -- get Quest
-        const questModel = {
-            idQuestTpl  : 10,
-            time       : 100,
-            tasks      : [
-                { task : '3+5=_', correct : '8' },
-                { task : '1+7=_', correct : '8' },
-                { task : '2+5=_', correct : '7' },
-                { task : '6+3=_', correct : '9' },
-            ]
-        }
+        const questModel = typeof initQuest == 'string'
+            ? eval(`(${initQuest})`)
+            : initQuest
 
 
         // -- Timer

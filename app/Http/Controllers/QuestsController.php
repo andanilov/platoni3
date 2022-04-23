@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\QuestsMap;
+use App\Models\Quests;
 
 
 class QuestsController extends Controller
 {
 
-    private $questMap;
+    private $questsMap;
 
-    public function __construct() 
+    public function __construct()
     {
-        $this->questMap = new QuestsMap();
+        $this->questsMap = new Quests();
     }
 
 
@@ -21,7 +21,7 @@ class QuestsController extends Controller
     {
         $output = [];
 
-        foreach($this->questMap->getQuestMap() as $quests)
+        foreach($this->questsMap->getQuestsMap() as $quests)
 
             $output[$quests->level][] = [
                 'title'         => $quests->title,

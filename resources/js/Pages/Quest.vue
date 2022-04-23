@@ -17,7 +17,9 @@ import CheckArea from '@/components/CheckArea'
 
 import { useQuest } from '@/use/Quest'
 
+const props = defineProps({ quest: String })
+
 // -- Quest initialisation
-useQuest(true)
+useQuest(props.quest)
 
 </script>

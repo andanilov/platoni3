@@ -1,12 +1,10 @@
 <template>
 
-    <div class="grid grid-cols-3 mx-auto
-    w-fit
-    ">
+    <div class="grid grid-cols-3 mx-auto w-fit">
 
-            <button class="w-[6rem] text-[3em] font-bold
-             bg-stone-50 text-gray-500 hover:bg-stone-200 active:bg-stone-50
-            mx-auto rounded-xl shadow-sm border-2 aspect-square"
+            <button class=" font-bold mx-auto rounded-xl shadow-sm border-2 aspect-square
+                bg-stone-50 text-gray-500 hover:bg-stone-200 active:bg-stone-50 hover:shadow-none
+                w-[6rem] text-[3em]"
             style="margin: .5rem"
             :disabled="taskStatus != 'wait'"
             v-for="but in buttonsModel"

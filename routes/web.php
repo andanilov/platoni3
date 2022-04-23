@@ -49,7 +49,7 @@ Route::middleware([
 
 Route::get('/',        [IndexController::class, 'index']);
 Route::get('/login',   [IndexController::class, 'index'])->name('login');
-Route::get('/quest',   [QuestController::class, 'index'])->name('quest');
+Route::get('/quest/{id}',   [QuestController::class, 'index'])->where(['id' => '[0-9]+'])->name('quest');
 
 
 

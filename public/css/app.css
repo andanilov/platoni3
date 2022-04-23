@@ -2005,6 +2005,11 @@ select {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
+.hover\:shadow-none:hover {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .focus\:z-10:focus {
   z-index: 10;
 }
@@ -2235,6 +2240,26 @@ select {
     width: 100%;
   }
 
+  .sm\:w-\[5rem\] {
+    width: 5rem;
+  }
+
+  .sm\:w-\[70\%\] {
+    width: 70%;
+  }
+
+  .sm\:w-\[10rem\] {
+    width: 10rem;
+  }
+
+  .sm\:w-\[60\%\] {
+    width: 60%;
+  }
+
+  .sm\:w-\[50\%\] {
+    width: 50%;
+  }
+
   .sm\:max-w-md {
     max-width: 28rem;
   }
@@ -2358,6 +2383,14 @@ select {
   .sm\:text-\[3\.5rem\] {
     font-size: 3.5rem;
   }
+
+  .sm\:text-\[2\.5em\] {
+    font-size: 2.5em;
+  }
+
+  .sm\:text-\[2em\] {
+    font-size: 2em;
+  }
 }
 @media (min-width: 768px) {
 
@@ -2403,6 +2436,10 @@ select {
     grid-column: span 4 / span 4;
   }
 
+  .lg\:w-\[4rem\] {
+    width: 4rem;
+  }
+
   .lg\:basis-1\/4 {
     flex-basis: 25%;
   }
@@ -2410,6 +2447,20 @@ select {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .lg\:text-\[2em\] {
+    font-size: 2em;
+  }
+}
+@media (min-width: 1280px) {
+
+  .xl\:w-\[3\.5rem\] {
+    width: 3.5rem;
+  }
+
+  .xl\:text-\[1\.8em\] {
+    font-size: 1.8em;
   }
 }
 

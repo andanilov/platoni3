@@ -1,6 +1,9 @@
 <template>
 
-    <div class=" grid mx-auto mt-5 px-5">
+    <div class="grid mx-auto mt-5 px-5
+    w-full
+    sm:w-[50%]
+    ">
 
         <button class="rounded-lg py-2 shadow-sm text-[1.5rem] uppercase tracking-wider
         bg-lime-500 text-white"
