@@ -27,11 +27,13 @@ class Quest extends Model implements QuestTpl
         //     ->toJson();
 
         return DB::select("SELECT
+                `quests_map`.`id` AS `current_id`,
                 `quest_levels_templates`.`quest_name`,
                 `quest_levels_templates`.`min`,
                 `quest_levels_templates`.`max`,
                 `quest_levels_templates`.`time`,
-                `quest_levels_templates`.`count`
+                `quest_levels_templates`.`count`,
+                (SELECT MIN(`id`) FROM `quests_map` WHERE `quests_map`.`id` > `current_id`) AS `next_id`
                 FROM `quests_map`, `quest_levels_templates`
                 WHERE `quests_map`.`id` = :id
                     AND `quest_levels_templates`.`id` = `quests_map`.`id_levels_template`

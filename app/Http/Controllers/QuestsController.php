@@ -25,8 +25,9 @@ class QuestsController extends Controller
 
             $output[$quests->level][] = [
                 'title'         => $quests->title,
-                'questName'    => $quests->quest_name,
+                'questName'     => $quests->quest_name,
                 'count'         => $quests->count,
+                'currentId'     => $quests->currentId,
             ];
 
         echo json_encode($output);

@@ -19,7 +19,13 @@
             />
 
         </div>
+
     </div>
+
+<!-- <pre>
+questsModel: {{ questsModel }}
+</pre> -->
+
 
 </template>
 
@@ -27,10 +33,5 @@
 import QuestOutput from '@/components/QuestOutput'
 import LevelTitle from '@/components/LevelTitle'
 
-
 const props = defineProps({ questsModel : Object })
-
-
-
-
 </script>

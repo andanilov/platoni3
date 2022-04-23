@@ -5,21 +5,23 @@ const Quest = {
     namespaced: true,
 
     state: () => ({
-        tasks       : {},
-        tasksCount  : 0,
 
-        time        : 30,
-        currentTime : ref(),
-        timer       : '',
-        status      : 'wait', // wait | right | wrong
-        lives       : 3,
-        tasks       : [],
-        answers     : [],
-        mistakes    : [],
-        currentTask : {},
-        inputArea   : '',
+        idQuest      : 0,
+        idQuestNext  : 0,
 
+        tasks           : {},
+        tasksCount      : 0,
 
+        time            : 30,
+        currentTime     : ref(),
+        timer           : '',
+        status          : 'wait', // wait | right | wrong | finished
+        lives           : 3,
+        tasks           : [],
+        answers         : [],
+        mistakes        : [],
+        currentTask     : {},
+        inputArea       : '',
     }),
 
     getters : {
@@ -27,6 +29,9 @@ const Quest = {
     },
 
     mutations : {
+        setIdQuest      : (state, newVal)           => { state.idQuest = newVal },
+        setIdQuestNext  : (state, newVal)           => { state.idQuestNext = newVal },
+
         setTime         : (state, newVal)           => { state.time = newVal },
         setTimer        : (state, newVal)           => { state.timer = newVal },
         setCurrentTime  : (state, newVal)           => { state.currentTime = newVal },

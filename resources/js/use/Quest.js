@@ -106,10 +106,10 @@ export function useQuest(initQuest = false) {
             else if(STORE.tasks.length === 0)
                 console.log('The End - TASKS left!')
 
-            // Set new task
-            // else
-            //     setNextTask()
+            else
+                return
 
+            store.commit('Quest/setStatus', 'finished')
         }
 
 
@@ -130,9 +130,6 @@ export function useQuest(initQuest = false) {
 
             }, 1000))
 
-
-            // stop timer method
-            // store.commit('Quest/setStopTimer', () => { clearInterval(timerId) } )
         }
 
 
@@ -146,6 +143,11 @@ export function useQuest(initQuest = false) {
             ? eval(`(${initQuest})`)
             : initQuest
 
+
+
+        // -- Set current quest id and next
+        store.commit('Quest/setIdQuest', questModel.idQuest)
+        store.commit('Quest/setIdQuestNext', questModel.idQuestNext)
 
         // -- Timer
         store.commit('Quest/setTime', questModel.time)
@@ -168,28 +170,22 @@ export function useQuest(initQuest = false) {
     }
 
 
-
-
-
-
-
-
-
-
     return {
 
-        inputStr:       computed( () => STORE.currentTask.task.replace('_', `<span id="${inputId}">_</span>`)),
+        allLives:       STORE.lives,
+        allTasks:       STORE.tasksCount,
         buttonsModel:   [1,2,3,4,5,6,7,8,9,'.',0,'del'],
+        idQuest:        STORE.idQuest,
+        idQuestNext:    STORE.idQuestNext,
 
+
+        inputStr:       computed( () => STORE.currentTask.task.replace('_', `<span id="${inputId}">_</span>`)),
         tasks:          computed( () => STORE.tasks ),
         answers:        computed( () => STORE.answers ),
         mistakes:       computed( () => STORE.mistakes ),
         currentTask:    computed( () => STORE.currentTask ),
         currentTime:    computed( () => STORE.currentTime ),
         taskStatus:     computed( () => STORE.status ),
-        allLives:       STORE.lives,
-        allTasks:       STORE.tasksCount,
-
         taskProgress:   computed( () => +((STORE.answers.length + STORE.mistakes.length) * 100 / STORE.tasksCount ) ),
         passed:         computed( () => STORE.answers.length + STORE.mistakes.length ),
         left:           computed( () => STORE.tasksCount - STORE.answers.length - STORE.mistakes.length ),

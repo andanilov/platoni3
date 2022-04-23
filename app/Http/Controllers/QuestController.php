@@ -55,9 +55,10 @@ class QuestController extends Controller implements QuestControllerI
 
         // -- Output Quest object
         $questObj = "{
-            idQuestTpl: {$request->id},
-            time:       {$this->getQuestMap[0]->time},
-            tasks:      [ ".implode(',', $questTasks)." ]
+            idQuest:     {$request->id},
+            idQuestNext: {$this->getQuestMap[0]->next_id},
+            time:        {$this->getQuestMap[0]->time},
+            tasks:       [ ".implode(',', $questTasks)." ]
         }";
 
         return Inertia::render('Quest', [
