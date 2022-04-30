@@ -49,6 +49,10 @@ class QuestController extends Controller implements QuestControllerI
         if( !( $this->getQuestMap = $this->model->getQuestMap($request->id) ) )
             return response([], 200);
 
+// echo "<pre>";
+// print_r($this->getQuestMap[0]);
+// echo "</pre>";
+
         // -- get QuestTasks
         $questTasks = $this->generateTask( $this->getQuestMap[0] );
 
@@ -56,11 +60,11 @@ class QuestController extends Controller implements QuestControllerI
         // -- Output Quest object
         $questObj = "{
             idQuest:     {$request->id},
-            idQuestNext: {$this->getQuestMap[0]->next_id},
+            idQuestNext: ". ($this->getQuestMap[0]->next_id ?? 0) .",
             time:        {$this->getQuestMap[0]->time},
             tasks:       [ ".implode(',', $questTasks)." ]
         }";
-
+//($this->getQuestMap[0]->next_id ?? 0)
 
         return Inertia::render('Quest', [
             'user'  => Auth::user(),

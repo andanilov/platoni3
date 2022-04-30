@@ -35,7 +35,7 @@
     <div class="py-10 col-span-2">
 
         <div class="col-span-2 text-red-600"
-        v-if="mistakes.length > 2">
+        v-if="mistakes.length">
             <span class="px-2 border-red-600 border-[1px] text-red-600 mx-1 rounded-lg"
             v-for="mistake in mistakes"
             :key="mistake.task">
@@ -65,7 +65,7 @@
     </Link>
 
     <Link class="px-3"
-    v-else
+    v-else-if="+idQuestNext > 0"
     :href="`/quest/${idQuestNext}`">
         <but type="ok" class="w-full">Далее</but>
     </Link>

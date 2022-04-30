@@ -144,6 +144,9 @@ export function useQuest(initQuest = false) {
 
         const timerStart = () => {
 
+            if(STORE.setTimer)
+                clearInterval(STORE.setTimer)
+
             store.commit('Quest/setCurrentTime', ref(STORE.time - 1))
 
             // Add and start timer
@@ -151,8 +154,10 @@ export function useQuest(initQuest = false) {
 
                 store.commit('Quest/setCurrentTime', ref(STORE.currentTime - 1))
 
-                if(STORE.currentTime === 0)
+                if(STORE.currentTime === 0) {
+                    clearInterval(STORE.setTimer)
                     checkAnswer()
+                }
 
             }, 1000))
 

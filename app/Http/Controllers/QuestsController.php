@@ -58,7 +58,7 @@ class QuestsController extends Controller
                 'count'         => $quests->count,
                 'firstId'       => $quests->firstId,
                 'currentId'     => $quests->currentId   ?? $quests->firstId,
-                'nextId'        => $quests->nextId      ?? $quests->firstId ?? false,
+                'nextId'        => $quests->nextId      ?? $quests->currentId == $quests->lastId ? $quests->lastId : $quests->firstId,
                 'lastId'        => $quests->lastId,
                 'passedNum'     => $quests->passedNum   ?? 0,
             ];
