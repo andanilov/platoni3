@@ -9,10 +9,12 @@ use App\Models\Quest;
 
 interface QuestControllerI
 {
-    public function index ( Request $request );     // Output quest
-    public function generateTask( $params );        // Tasks generate params: min, max, count, count
+    public function index ( Request $request );             // Output quest
+    public function addUserQuest( Request $request );       // Add user passed quest by POST data
 
-    public function addition2 ($min, $max);         // Handler
+    public function generateTask( $params );                // Tasks generate params: min, max, count, count
+
+    public function addition2 ($min, $max);                 // Handler
 
 
 }
@@ -43,11 +45,9 @@ class QuestController extends Controller implements QuestControllerI
         if( !$request->id )
             return response([], 200);
 
-
         // -- get Map
         if( !( $this->getQuestMap = $this->model->getQuestMap($request->id) ) )
             return response([], 200);
-
 
         // -- get QuestTasks
         $questTasks = $this->generateTask( $this->getQuestMap[0] );
@@ -61,11 +61,32 @@ class QuestController extends Controller implements QuestControllerI
             tasks:       [ ".implode(',', $questTasks)." ]
         }";
 
+
         return Inertia::render('Quest', [
             'user'  => Auth::user(),
             'quest' => $questObj,
         ]);
     }
+
+
+
+
+    // -- Add user passed quest
+
+    public function addUserQuest( Request $request )
+    {
+        return response()->json(['result' =>
+            $this->model->addQuestUser([
+                'id_user'       =>  Auth::id(),
+                'id_quest_map'  =>  $request->id_quest_map,
+                'answers_num'   =>  $request->answers_num,
+                'mistakes_num'  =>  $request->mistakes_num,
+                'quest_period'  =>  $request->quest_period,
+                'mistakes'      =>  $request->mistakes,
+                ])
+        ]);
+    }
+
 
 
 

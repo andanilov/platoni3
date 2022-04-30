@@ -6,11 +6,13 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
         <!-- <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet"> -->
-        
+
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 

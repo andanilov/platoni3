@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestsController;
+use App\Http\Controllers\QuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/get/map', [QuestsController::class, 'getMap'])->name('getMap');
+// Route::get('/get/map', [QuestsController::class, 'getMap'])->name('getMap');
+// Route::post('/add/user_quest', [QuestController::class, 'addUserQuest'])->name('addUserQuest'); //->middleware('auth');

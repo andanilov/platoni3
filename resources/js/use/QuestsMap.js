@@ -7,7 +7,7 @@ export function useQuestsMap() {
     const { response, request } = useFetch()
 
     if( loading ) {
-        request('/api/get/map')
+        request('/get/map')
         loading.value = false
     }
 

@@ -11,11 +11,11 @@ const Quest = {
 
         tasks           : {},
         tasksCount      : 0,
-
+        questPeriod     : 0,
         time            : 30,
         currentTime     : ref(),
         timer           : '',
-        status          : 'wait', // wait | right | wrong | finished
+        status          : 'wait', // wait | right | wrong | finished | loading
         lives           : 3,
         tasks           : [],
         answers         : [],
@@ -31,7 +31,7 @@ const Quest = {
     mutations : {
         setIdQuest      : (state, newVal)           => { state.idQuest = newVal },
         setIdQuestNext  : (state, newVal)           => { state.idQuestNext = newVal },
-
+        setQuestPeriod  : (state, newVal)           => { state.questPeriod = newVal },
         setTime         : (state, newVal)           => { state.time = newVal },
         setTimer        : (state, newVal)           => { state.timer = newVal },
         setCurrentTime  : (state, newVal)           => { state.currentTime = newVal },

@@ -1,11 +1,15 @@
 import { useStore } from 'vuex'
 import { computed, ref } from 'vue'
+import { useFetchPost } from '@/use/FetchPost'
+
+import { Inertia } from '@inertiajs/inertia'
 
 export function useQuest(initQuest = false) {
 
     const store     = useStore()
     const STORE     = store.state.Quest
     const inputId   = 'questInput'
+    const { response, request } = useFetchPost()
 
 
     // --- Methods ---
@@ -19,7 +23,7 @@ export function useQuest(initQuest = false) {
             const currentTask = tasks.shift()
 
             store.commit('Quest/setCurrentTask', currentTask)
-            store.commit('Quest/setInputArea', currentTask.task)
+            // store.commit('Quest/setInputArea', currentTask.task)
             store.commit('Quest/setTasks', tasks)
 
             // Clear input area
@@ -30,6 +34,7 @@ export function useQuest(initQuest = false) {
 
             // Set task status
             store.commit('Quest/setStatus', 'wait')
+
         }
 
 
@@ -66,6 +71,7 @@ export function useQuest(initQuest = false) {
 
 
 
+
         // -- Check Answer
 
         const checkAnswer = () => {
@@ -86,6 +92,10 @@ export function useQuest(initQuest = false) {
                 store.commit('Quest/setMistakes', [...STORE.mistakes, { answer: STORE.inputArea, ...STORE.currentTask }] )
                 store.commit('Quest/setStatus', 'wrong')
             }
+
+            // -- add task period to quest period
+            store.commit('Quest/setQuestPeriod', STORE.questPeriod + STORE.time - STORE.currentTime)
+
             // Check is there the end
             isTheEnd()
 
@@ -94,23 +104,39 @@ export function useQuest(initQuest = false) {
 
 
 
+
         // -- End of quests
 
-        const isTheEnd = () => {
+        const isTheEnd = async () => {
 
-            // -- Lives left
-            if(STORE.mistakes.length >= STORE.lives)
-                console.log('The End - LIVES left!')
-
-            // -- Tasks left
-            else if(STORE.tasks.length === 0)
-                console.log('The End - TASKS left!')
-
-            else
+            // -- Check Lives and Tasks count
+            if(STORE.mistakes.length < STORE.lives && STORE.tasks.length != 0)
                 return
 
+            // -- Quest Finishing
+
+            // - If save needed
+
+
+            store.commit('Quest/setStatus', 'loading')
+            await request('/add/user_quest', {
+                id_quest_map:   STORE.idQuest,
+                answers_num:    STORE.answers.length,
+                mistakes_num:   STORE.mistakes.length,
+                quest_period:   STORE.questPeriod,
+                mistakes:       STORE.mistakes,
+            })
+
+
+
+
+            // - set status = finished
             store.commit('Quest/setStatus', 'finished')
+
+
+
         }
+
 
 
 
@@ -131,6 +157,7 @@ export function useQuest(initQuest = false) {
             }, 1000))
 
         }
+
 
 
 
@@ -157,6 +184,9 @@ export function useQuest(initQuest = false) {
 
         // -- Tasks count
         store.commit('Quest/setTasksCount', questModel.tasks.length)
+
+        // -- Period initialization
+        store.commit('Quest/setQuestPeriod', 0)
 
         // -- Answers
         store.commit('Quest/setAnswers', [])
@@ -189,6 +219,7 @@ export function useQuest(initQuest = false) {
         taskProgress:   computed( () => +((STORE.answers.length + STORE.mistakes.length) * 100 / STORE.tasksCount ) ),
         passed:         computed( () => STORE.answers.length + STORE.mistakes.length ),
         left:           computed( () => STORE.tasksCount - STORE.answers.length - STORE.mistakes.length ),
+        questPeriod:    computed( () => STORE.questPeriod ),
 
         setNextTask,
         addInput,

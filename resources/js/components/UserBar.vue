@@ -1,7 +1,7 @@
 <template>
 
     <div v-if="currentUser">
-        <dropdown-menu 
+        <dropdown-menu
             :title="currentUser.name ?? currentUser.email"
             side="right">
             <ul class="leading-8">
@@ -13,7 +13,7 @@
     </div>
 
     <div v-else>
-    
+
         <button @click="registerToggle">Регистрация</button>&nbsp;
         <button @click="loginToggle">Вход</button>
 
@@ -65,13 +65,13 @@ export default {
         let { show: loginShow, toggle: loginToggle } = useToggle()
         let { show: registerShow, toggle: registerToggle } = useToggle()
 
-        let currentUser = computed( () => useGetUser() )     
+        let currentUser = computed( () => useGetUser() )
 
         return {
             currentUser,
             loginShow, loginToggle,
             registerShow, registerToggle,
-            out: () => { 
+            out: () => {
                 Inertia.post(route('logout') )
                 loginShow.value = registerShow.value = false
             }

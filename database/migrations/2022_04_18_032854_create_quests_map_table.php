@@ -22,7 +22,7 @@ return new class extends Migration
 
         $defaultInsert = [
 
-            1 => [1, 1, 2],
+            1 => [1 => 1, 1 => 1, 2 => 1],
             2 => [2, 2, 3,                  37, 37, 38],
             3 => [2, 3, 3, 3,               37, 38, 38, 39],
             4 => [3, 3, 4, 4,               38, 39, 39, 39,             10, 10, 11, 11],
@@ -36,9 +36,8 @@ return new class extends Migration
 
                 DB::table('quests_map')->insert(
                     array(
-                        'level'=>$level,
-                        'id_levels_template' => $idLevels,
-                    )
+                        'level'                 => $level,
+                        'id_levels_template'    => $idLevels,                    )
                 );
 
 

@@ -5,10 +5,9 @@ export function useGetUser(user = false) {
 
     const store = useStore()
 
-    if(user != false) 
-        store.commit('setUser', computed(() => user))
+    if(user != false)
+        store.commit('User/setUser', computed(() => user))
 
 
-    return store.getters.getUser
-
+    return store.state.User.user
 }

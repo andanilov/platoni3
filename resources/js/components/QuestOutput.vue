@@ -1,34 +1,48 @@
 <template>
 
-<Link :href="`/quest/${quest.currentId}`">
+    <div class="relative aspect-square w-[7rem] m-1">
 
-    <div class="relative basis-1/3 lg:basis-1/4 max-w-[150px] aspect-square m-3">
+        <Link :href="`/quest/${quest.nextId}`">
 
-        <!-- Progress circle -->
-        <div class="absolute inset-x-0 bottom-0 h-full rounded-full"
-        :style="{background : useGradientSegment( Math.round(1 * 100 / quest.count) , '#a3e635', '#f5f5f4')}"
-        ></div>
-
-        <!-- Progress numbers -->
-        <div class="absolute bottom-0 right-0 left-0 z-20">
-            <span class="bg-white px-2 py-1 border-2 border-white rounded-lg shadow-md">
-                {{ 1 }} <span class="text-[.7em]">/</span> {{ quest.count }}
-            </span>
-        </div>
+            <!-- Progress circle -->
+            <div class="absolute inset-x-0 bottom-0 h-full rounded-full"
+            :style="{ background : !quest.passedNum
+                ? '#f5f5f4'
+                : quest.passedNum === quest.count
+                    ? '#f9f9f9'
+                    : useGradientSegment( Math.round(quest.passedNum * 100 / quest.count) , '#a3e635', '#f5f5f4')}">
+            </div>
 
 
-        <div class="relative flex justify-center items-center aspect-square rounded-full align-middle z-10 border-white border-8 m-[.55em]"
-        :style="{ background : useGetQuestColor(quest.questName).bgColor }">
+            <!-- Progress numbers -->
+            <div class="absolute bottom-0 right-0 left-0 z-20">
+                <span class="bg-white px-2 py-1 rounded-lg shadow-md text-[.9em]"
+                :class="{'text-stone-200' : !quest.passedNum }">
+                    {{ quest.passedNum }} <span class="text-[.6em]">/</span> {{ quest.count }}
+                </span>
+            </div>
 
-            <div class="w-full px-3 font-merriweather text-[2.5rem] sm:text-[3.5rem]"
-            :style="{ color : useGetQuestColor(quest.questName).color }"
-            >{{ quest.title }}</div>
 
-        </div>
+            <div class="m-2 relative flex justify-center items-center aspect-square rounded-full align-middle z-10 border-white border-8"
+            :style="{ background : quest.passedNum === quest.count
+                    ? '#f2f2f2'
+                    : useGetQuestColor(quest.questName).bgColor}">
+
+                <div class="w-full px-3 font-merriweather flex justify-center items-center aspect-square
+                text-[2.5rem] sm:text-[3.5rem]"
+                :style="{ color : quest.passedNum === quest.count
+                    ? '#ссс'
+                    : useGetQuestColor(quest.questName).color}">
+                    {{ quest.title }}
+                </div>
+
+            </div>
+
+        </Link>
 
     </div>
 
-</Link>
+
 
 </template>
 
@@ -37,5 +51,20 @@ import { useGradientSegment } from '@/use/GradientSegment'
 import { useGetQuestColor } from '@/use/GetQuestColor'
 import { Link } from '@inertiajs/inertia-vue3'
 
-const props = defineProps({ quest : Object })
+const props = defineProps({
+    user  : Object,
+    quest : Object
+})
+
+console.log(props.user);
+
+if(props.user) {
+
+
+} else  {
+
+    const progress = 0
+
+}
+
 </script>

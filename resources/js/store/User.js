@@ -11,7 +11,7 @@ const User = {
     },
 
     mutations : {
-        setUser : (state, newVal) => { state.user.value = newVal }
+        setUser : (state, newVal) => { state.user = newVal }
     },
 
 }

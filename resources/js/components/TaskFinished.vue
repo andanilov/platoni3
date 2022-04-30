@@ -24,27 +24,34 @@
         </div>
     </div>
 
-    <!-- <div class=" border-2">
-        1 мин 30 сек
-    </div> -->
 
-
-     <div class="bg-stone-50 aspect-square flex items-center text-red-500 rounded-xl font-bold ml-6 mr-4 mb-6">
+    <div class="bg-stone-50 aspect-square flex items-center text-red-500 rounded-xl font-bold ml-6 mr-4 mb-6">
         <div class="text-[5rem] w-full leading-none">
             {{ mistakes.length }}
             <div class="text-[1rem] uppercase tracking-wider">ошибки</div>
         </div>
     </div>
 
-    <div class="col-span-2 p-4 text-red-600 py-10"
-    v-if="mistakes.length > 2">
-        Ошибки:
-        <span class="px-2 border-red-600 border-[1px] text-red-600 mx-1 rounded-lg"
-        v-for="mistake in mistakes"
-        :key="mistake.task">
-            {{ mistake.task }}
-        </span>
+    <div class="py-10 col-span-2">
+
+        <div class="col-span-2 text-red-600"
+        v-if="mistakes.length > 2">
+            <span class="px-2 border-red-600 border-[1px] text-red-600 mx-1 rounded-lg"
+            v-for="mistake in mistakes"
+            :key="mistake.task">
+                {{ mistake.task }}
+            </span>
+        </div>
+
+        <div class=" col-span-2 text-stone-600 mt-6">
+            <div class="mx-auto inline-block relative">
+                <BaseIcon name="timer" width="1.6em" class="relative inline-block -top-1"/>
+                <span class="text-[1.2em] ml-2">{{ useSecondsToMinutes(questPeriod) }}</span>
+            </div>
+        </div>
+
     </div>
+
 
     <Link class="px-3"
     href="/" >
@@ -70,16 +77,16 @@
 
 <script setup>
 import But from '@/components/But'
+import BaseIcon from '@/icons/BaseIcon'
 import { Link } from '@inertiajs/inertia-vue3'
 import { useQuest } from '@/use/Quest'
+import { useSecondsToMinutes } from '@/use/SecondsToMinutes'
 
 const {
     mistakes,
     answers,
     idQuest,
     idQuestNext,
+    questPeriod,
 } = useQuest()
-
-console.log();
-
 </script>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\QuestsController;
 use App\Http\Controllers\QuestController;
 
 /*
@@ -42,7 +43,12 @@ Route::middleware([
         ]);
     })->name('Profile');
 
+    // Route::get('/get/map', [QuestsController::class, 'getMap'])->name('getMap');
+
 });
+
+
+
 
 
 // --- Guests
@@ -52,4 +58,7 @@ Route::get('/login',   [IndexController::class, 'index'])->name('login');
 Route::get('/quest/{id}',   [QuestController::class, 'index'])->where(['id' => '[0-9]+'])->name('quest');
 
 
+// --- XHR
 
+Route::post('/add/user_quest', [QuestController::class, 'addUserQuest'])->name('addUserQuest');
+Route::get('/get/map', [QuestsController::class, 'getMap'])->name('getMap');

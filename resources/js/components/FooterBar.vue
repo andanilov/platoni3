@@ -1,6 +1,6 @@
 <template>
 
-    <h2>Footer</h2>
+    <h2></h2>
 
 </template>
 

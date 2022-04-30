@@ -3,29 +3,14 @@
     <nav-bar/>
     <hr/>
     <slot/>
-    <hr/>
     <footer-bar/>
 
 </template>
 
-<script>
+<script setup>
 import NavBar from '@/components/NavBar'
 import FooterBar from '@/components/FooterBar'
 
-export default {
+const props = defineProps({ currentUser: Object })
 
-    components : {
-        NavBar,
-        FooterBar
-    },
-
-    props : { currentUser: Object },
-
-    setup() {
-
-        return {
-
-        }
-    },
-}
 </script>

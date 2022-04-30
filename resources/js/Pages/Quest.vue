@@ -2,17 +2,16 @@
 
 <div class="max-w-3xl mx-auto p-3">
 
-<task-finished/>
+    <loading v-if="taskStatus === 'loading'"/>
 
-    <!-- <task-finished
-    v-if="taskStatus === 'finished'"/>
+    <task-finished v-else-if="taskStatus === 'finished'"/>
 
     <div v-else>
         <quest-panel/>
         <input-area/>
         <input-buttons/>
         <check-area/>
-    </div> -->
+    </div>
 
 </div>
 
@@ -24,6 +23,7 @@ import InputArea from '@/components/InputArea'
 import InputButtons from '@/components/InputButtons'
 import CheckArea from '@/components/CheckArea'
 import TaskFinished from '@/components/TaskFinished'
+import Loading from '@/components/Loading'
 
 import { useQuest } from '@/use/Quest'
 
