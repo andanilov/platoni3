@@ -43,16 +43,18 @@ const props = defineProps({
 })
 
 
-const getProgressQuestLevel = quests =>
-    quests.length == 1
-        ? quests[0].passedNum
-        : quests.reduce( (item1, item2) => item1.passedNum + item2.passedNum )
 
 
-const getAllQuestsNum = quests =>
-    quests.length == 1
-        ? quests[0].count
-        : quests.reduce( (item1, item2) => item1.count + item2.count )
+const getProgressQuestLevel = quests => 1
+    // quests.length == 1
+    //     ? quests[0].passedNum
+    //     : quests.reduce( (item1, item2) => item1.passedNum + item2.passedNum )
+
+
+const getAllQuestsNum = quests => 1
+    // quests.length == 1
+    //     ? quests[0].count
+    //     : quests.reduce( (item1, item2) => item1.count + item2.count )
 
 
 

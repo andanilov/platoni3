@@ -52,15 +52,22 @@ class QuestsController extends Controller
             // - Set current level
             $currLvl = $quests->level;
 
+
+            // PreSet output rows
+            $qCurrentId = $quests->currentId ?? $quests->firstId;
+            $qNextId    = $quests->nextId ?? ( $qCurrentId == $quests->lastId ) ? $quests->lastId : $quests->firstId;
+            $qPassedNum = $quests->passedNum ?? 0;
+
             $output[$quests->level][] = [
                 'title'         => $quests->title,
                 'questName'     => $quests->quest_name,
                 'count'         => $quests->count,
                 'firstId'       => $quests->firstId,
-                'currentId'     => $quests->currentId   ?? $quests->firstId,
-                'nextId'        => $quests->nextId      ?? $quests->currentId == $quests->lastId ? $quests->lastId : $quests->firstId,
                 'lastId'        => $quests->lastId,
-                'passedNum'     => $quests->passedNum   ?? 0,
+
+                'currentId'     => $qCurrentId,
+                'nextId'        => $qNextId,
+                'passedNum'     => $qPassedNum,
             ];
 
         }

@@ -1,15 +1,29 @@
 import { useFetch } from '@/use/Fetch'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 
-export function useQuestsMap() {
+export function useQuestsMap($user = false) {
 
-    const loading = ref(true)
-    const { response, request } = useFetch()
+console.log('ENTER TO useQuestsMap!')
 
-    if( loading ) {
+    const store     = useStore()
+    const { loading, response, request } = useFetch()
+
+
+    const updateQuestsMap = (user = false) => {
+
         request('/get/map')
-        loading.value = false
+        store.commit('Quests/setQuestsLevelsMap', response)
+
     }
 
-    return response
+    // -- get quests map and set to store
+    updateQuestsMap();
+
+
+    return {
+        loading,
+        questsMap : computed( () => store.state.Quests.questsLevelsMap ),
+        updateQuestsMap,
+    }
 }
