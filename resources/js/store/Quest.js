@@ -21,7 +21,7 @@ const Quest = {
         answers         : [],
         mistakes        : [],
         currentTask     : {},
-        inputArea       : '',
+        // inputArea       : '',
     }),
 
     getters : {

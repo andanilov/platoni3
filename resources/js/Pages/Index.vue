@@ -15,7 +15,6 @@
 
     </wrapper-page>
 
-
 </template>
 
 <script setup>

@@ -21,14 +21,29 @@ class QuestsController extends Controller
     public function getMap()
     {
         $output = [];
-
+        $progressMap = [];
+        $limQstAfterPassed  = 1; // Levels limit after passed
         $currLvl            = 0;
         $currPassed         = 0;
         $currCount          = 0;
-        $limQstAfterPassed  = 1; // Levels limit after passed
 
 
-        foreach($this->questsMap->getQuestsMap( Auth::id() ?? false ) as $quests) {
+
+        // - Get progress for logged user
+        if( ($progress = Auth::id() ? $this->questsMap->getUserQuestsProgress(Auth::id()) : false) )
+
+        foreach( $progress as $prog)
+            $progressMap[ $prog->level ][ $prog->quest_name ] = [
+                'currentId' => $prog->currentId,
+                'nextId'    => $prog->nextId ?? 0,
+                'passedNum' => $prog->passedNum ?? 0
+            ];
+
+
+        // - Set quest map with user progress for front end
+        foreach($this->questsMap->getQuestsMap() as $quests) {
+
+            $currentProgress = $progressMap[ $quests->level ][ $quests->quest_name ] ?? [];
 
             // -- level chenged
             if( $currLvl != $quests->level ) {
@@ -43,20 +58,23 @@ class QuestsController extends Controller
                 $currCount  = 0; // Clear level all quests
             }
 
+            // - Set current level
+            $currLvl = $quests->level;
+
             // - Increase level quest passed number
-            $currPassed += $quests->passedNum ?? 0;
+            $currPassed += $currentProgress['passedNum'] ?? 0;
 
             // - Increase level quest all number
             $currCount += $quests->count;
 
-            // - Set current level
-            $currLvl = $quests->level;
-
-
             // PreSet output rows
-            $qCurrentId = $quests->currentId ?? $quests->firstId;
-            $qNextId    = $quests->nextId ?? ( $qCurrentId == $quests->lastId ) ? $quests->lastId : $quests->firstId;
-            $qPassedNum = $quests->passedNum ?? 0;
+            $qCurrentId = $currentProgress['currentId'] ?? $quests->firstId;
+            $qPassedNum = $currentProgress['passedNum'] ?? 0;
+            $qNextId = array_key_exists('nextId', $currentProgress) && $currentProgress['nextId'] > 0 && $currentProgress['nextId'] < $quests->lastId
+                            ? $currentProgress['nextId']
+                            : ($qCurrentId >= $quests->lastId
+                                ? $quests->lastId
+                                : $quests->firstId);
 
             $output[$quests->level][] = [
                 'title'         => $quests->title,
@@ -64,12 +82,10 @@ class QuestsController extends Controller
                 'count'         => $quests->count,
                 'firstId'       => $quests->firstId,
                 'lastId'        => $quests->lastId,
-
                 'currentId'     => $qCurrentId,
                 'nextId'        => $qNextId,
                 'passedNum'     => $qPassedNum,
             ];
-
         }
 
         echo json_encode($output);
