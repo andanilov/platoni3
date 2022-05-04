@@ -4,7 +4,6 @@ import { useStore } from 'vuex'
 
 export function useQuestsMap($user = false) {
 
-console.log('ENTER TO useQuestsMap!')
 
     const store     = useStore()
     const { loading, response, request } = useFetch()

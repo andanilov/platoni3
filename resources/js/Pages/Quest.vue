@@ -8,8 +8,11 @@
 
     <div v-else>
         <quest-panel/>
-        <input-area/>
-        <input-buttons/>
+
+        <input-area
+        :taskStr="currentTask.task"
+        :taskStatus="taskStatus"/>
+
         <check-area/>
     </div>
 
@@ -20,7 +23,6 @@
 <script setup>
 import QuestPanel from '@/components/QuestPanel'
 import InputArea from '@/components/InputArea'
-import InputButtons from '@/components/InputButtons'
 import CheckArea from '@/components/CheckArea'
 import TaskFinished from '@/components/TaskFinished'
 import Loading from '@/components/Loading'
@@ -30,5 +32,8 @@ import { useQuest } from '@/use/Quest'
 const props = defineProps({ quest: String })
 
 // -- Quest initialisation
-const { taskStatus } = useQuest(props.quest)
+const {
+    taskStatus,
+    currentTask,
+} = useQuest(props.quest)
 </script>

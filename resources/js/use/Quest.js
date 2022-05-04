@@ -1,14 +1,16 @@
 import { useStore } from 'vuex'
 import { computed, ref } from 'vue'
 import { useFetchPost } from '@/use/FetchPost'
+import { useInput } from '@/use/Input'
 
 import { Inertia } from '@inertiajs/inertia'
 
 export function useQuest(initQuest = false) {
 
-    const store     = useStore()
-    const STORE     = store.state.Quest
-    const inputId   = 'questInput'
+    const store = useStore()
+    const STORE = store.state.Quest
+
+    const { deleteInput, setInputStr } = useInput()
     const { response, request } = useFetchPost()
 
 
@@ -27,7 +29,7 @@ export function useQuest(initQuest = false) {
             store.commit('Quest/setTasks', tasks)
 
             // Clear input area
-            deleteInput(true)
+            setInputStr(currentTask.task)
 
             // Start timer
             timerStart()
@@ -39,39 +41,6 @@ export function useQuest(initQuest = false) {
 
 
 
-
-        // -- Add symbol to input area
-
-        const addInput = (symbol) => {
-
-            const $questInput = document.getElementById(inputId)
-
-            $questInput.innerHTML = $questInput.innerHTML === '_' ? symbol : $questInput.innerHTML + symbol
-            store.commit('Quest/setInputArea', $questInput.innerHTML)
-        }
-
-
-
-
-        // -- Delete symbol or all symbols from input area
-
-        const deleteInput = (all = false) => {
-
-            const $questInput = document.getElementById(inputId)
-
-            if(!$questInput || $questInput.innerHTML.length === 0)
-                return
-
-            let newInput = all ? '' : $questInput.innerHTML.substring(0, $questInput.innerHTML.length - 1)
-            newInput = newInput === '' ? '_' : newInput
-
-            $questInput.innerHTML = newInput
-            store.commit('Quest/setInputArea', newInput)
-        }
-
-
-
-
         // -- Check Answer
 
         const checkAnswer = () => {
@@ -80,16 +49,16 @@ export function useQuest(initQuest = false) {
             clearInterval(STORE.timer)
 
             // Correct
-            if(STORE.inputArea == STORE.currentTask.correct) {
+            if(store.state.Input.inputArea == STORE.currentTask.correct) {
 
-                store.commit('Quest/setAnswers', [...STORE.answers, { answer: STORE.inputArea, ...STORE.currentTask }])
+                store.commit('Quest/setAnswers', [...STORE.answers, { answer: store.state.Input.inputArea, ...STORE.currentTask }])
                 store.commit('Quest/setStatus', 'right')
             }
 
             // Mistake
             else {
 
-                store.commit('Quest/setMistakes', [...STORE.mistakes, { answer: STORE.inputArea, ...STORE.currentTask }] )
+                store.commit('Quest/setMistakes', [...STORE.mistakes, { answer: store.state.Input.inputArea, ...STORE.currentTask }] )
                 store.commit('Quest/setStatus', 'wrong')
             }
 
@@ -209,12 +178,9 @@ export function useQuest(initQuest = false) {
 
         allLives:       STORE.lives,
         allTasks:       STORE.tasksCount,
-        buttonsModel:   [1,2,3,4,5,6,7,8,9,'.',0,'del'],
         idQuest:        STORE.idQuest,
         idQuestNext:    STORE.idQuestNext,
 
-
-        inputStr:       computed( () => STORE.currentTask.task.replace('_', `<span id="${inputId}">_</span>`)),
         tasks:          computed( () => STORE.tasks ),
         answers:        computed( () => STORE.answers ),
         mistakes:       computed( () => STORE.mistakes ),
@@ -225,13 +191,11 @@ export function useQuest(initQuest = false) {
         passed:         computed( () => STORE.answers.length + STORE.mistakes.length ),
         left:           computed( () => STORE.tasksCount - STORE.answers.length - STORE.mistakes.length ),
         questPeriod:    computed( () => STORE.questPeriod ),
+        inputCommitName: 'Quest/setInputArea',
 
         setNextTask,
-        addInput,
-        deleteInput,
         checkAnswer,
         setNextTask,
-
     }
 
 }

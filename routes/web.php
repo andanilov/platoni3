@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\QuestsController;
 use App\Http\Controllers\QuestController;
+use App\Http\Controllers\MistakesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,8 @@ Route::middleware([
         ]);
     })->name('Profile');
 
-    // Route::get('/get/map', [QuestsController::class, 'getMap'])->name('getMap');
+    Route::get('/Mistakes', [MistakesController::class, 'index'])->name('Mistakes');
+    Route::get('/get/mistakes', [MistakesController::class, 'getMistakes'])->name('getMistakes');
 
 });
 
@@ -62,3 +64,4 @@ Route::get('/quest/{id}',   [QuestController::class, 'index'])->where(['id' => '
 
 Route::post('/add/user_quest', [QuestController::class, 'addUserQuest'])->name('addUserQuest');
 Route::get('/get/map', [QuestsController::class, 'getMap'])->name('getMap');
+
