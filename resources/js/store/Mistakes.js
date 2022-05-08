@@ -4,10 +4,13 @@ const Mistakes = {
 
     state : () => ({
         mistakes    : {},
+        allMistakes : 0,
+        maxMistakes : 10, // max count mistakes to continue quests
         currentTask : {},
+        corrected  : [],
         time        : Number,
-        taskStatus  : String,
-        imputArea   : String,
+        status      : 'wait', // wait | right | wrong | finished | loading
+        inputArea   : String,
 
         timer       : null,
     }),
@@ -16,9 +19,10 @@ const Mistakes = {
         setMistakes     : (state, newVal) => { state.mistakes = newVal },
         setCurrentTask  : (state, newVal) => { state.currentTask = newVal },
         setTime         : (state, newVal) => { state.time = Number(newVal) },
-        setTaskStatus   : (state, newVal) => { state.taskStatus = newVal },
-        setInputArea    : (state, newVal) => { state.timer = setInputArea },
-
+        setStatus       : (state, newVal) => { state.status = newVal },
+        setInputArea    : (state, newVal) => { state.inputArea = newVal },
+        setCorrected    : (state, newVal) => { state.corrected = newVal },
+        setAllMistakes  : (state, newVal) => { state.allMistakes = newVal },
         setTimer        : (state, newVal) => { state.timer = newVal },
     }
 

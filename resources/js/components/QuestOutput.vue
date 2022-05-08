@@ -56,7 +56,7 @@ const props = defineProps({
     quest : Object
 })
 
-console.log(props.user);
+// console.log(props.user);
 
 if(props.user) {
 

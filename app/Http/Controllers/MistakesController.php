@@ -31,4 +31,11 @@ class MistakesController extends Controller
     {
         return $this->model->getMistakes( Auth::id() ) ;
     }
+
+
+    public function deleteMistakes(Request $request)
+    {
+        $this->model->deleteMistakes( Auth::id(), $request->id_mistakes);
+        return response()->json([]);
+    }
 }

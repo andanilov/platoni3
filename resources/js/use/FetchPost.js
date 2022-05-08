@@ -3,7 +3,7 @@ import { useCsrfToken } from '@/use/CsrfToken'
 
 export function useFetchPost () {
 
-    const { response, request : requestPost } = useFetch()
+    const { response, loading, request : requestPost } = useFetch()
 
     const request = async (url, data) =>
 
@@ -17,5 +17,5 @@ export function useFetchPost () {
             body:       JSON.stringify(data) // body data type must match "Content-Type" header
           })
 
-    return { response, request }
+    return { response, request, loading }
 }

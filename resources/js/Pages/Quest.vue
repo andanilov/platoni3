@@ -13,7 +13,7 @@
         :taskStr="currentTask.task"
         :taskStatus="taskStatus"/>
 
-        <check-area/>
+        <check-quest/>
     </div>
 
 </div>
@@ -23,7 +23,7 @@
 <script setup>
 import QuestPanel from '@/components/QuestPanel'
 import InputArea from '@/components/InputArea'
-import CheckArea from '@/components/CheckArea'
+import CheckQuest from '@/components/CheckQuest'
 import TaskFinished from '@/components/TaskFinished'
 import Loading from '@/components/Loading'
 

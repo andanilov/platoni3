@@ -34,9 +34,4 @@ const props = defineProps({
 const gradientBackground = (props.progress != 'undefined' && props.all > 0)
     ? useGradientSegment( Math.round(props.progress * 100 / props.all), '#a3e635', '#f5f5f4' )
     : 'inherit'
-
-
-
-console.log(gradientBackground);
-
 </script>

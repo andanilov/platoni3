@@ -9,16 +9,12 @@
        </div>
 
         <div class="w-4/5 flex flex-col justify-center items-center px-4">
-            <!-- <progress-bar
-            :progress="taskProgress"
-            :passed="passed"
-            :left="left"
-            /> -->
+            Работа над ошибками
         </div>
-        <div class="w-1/10 text-right min-w-fit">
-            <!-- <lives
-            :full="allLives"
-            :empty="mistakes.length"/> -->
+        <div class="w-1/10 text-right min-w-fit ">
+            <span class="px-2 py-[.2em] mx-1 bg-lime-500 text-white rounded-lg">{{ corrected.length }}</span>
+            <span class="px-2 py-[.2em] mx-1 bg-stone-100 rounded-lg">{{ mistakes.length}}</span>
+            <span class="px-2 py-[.2em] mx-1 bg-red-400 text-white rounded-lg">{{ allMistakes - mistakes.length - corrected.length - (currentTask ? 1 : 0) }}</span>
         </div>
     </div>
 
@@ -26,28 +22,15 @@
 
 <script setup>
 import { useMistakes } from '@/use/Mistakes'
+import Timer from '@/components/Timer'
 
 const {
     time,
     taskStatus,
+    mistakes,
+    corrected,
+    allMistakes,
+    currentTask,
 } = useMistakes()
 
-
-
-// import { useQuest } from '@/use/Quest'
-// import { computed, watchEffect } from 'vue'
-
-import Timer from '@/components/Timer'
-// import ProgressBar from '@/components/ProgressBar'
-// import Lives from '@/components/Lives'
-
-// const {
-//     allLives,
-//     mistakes,
-//     currentTime,
-//     taskStatus,
-//     taskProgress,
-//     passed,
-//     left,
-// } = useQuest()
 </script>

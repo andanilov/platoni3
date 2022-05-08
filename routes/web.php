@@ -45,7 +45,9 @@ Route::middleware([
     })->name('Profile');
 
     Route::get('/Mistakes', [MistakesController::class, 'index'])->name('Mistakes');
-    Route::get('/get/mistakes', [MistakesController::class, 'getMistakes'])->name('getMistakes');
+
+    Route::post('/get/mistakes', [MistakesController::class, 'getMistakes'])->name('getMistakes');
+    Route::post('/delete/mistakes', [MistakesController::class, 'deleteMistakes'])->name('deleteMistakes');
 
 });
 
