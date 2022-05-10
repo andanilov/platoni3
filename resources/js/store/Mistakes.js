@@ -1,3 +1,5 @@
+import { ref } from 'vue'
+
 const Mistakes = {
 
     namespaced: true,
@@ -7,9 +9,9 @@ const Mistakes = {
         allMistakes : 0,
         maxMistakes : 10, // max count mistakes to continue quests
         currentTask : {},
-        corrected  : [],
-        time        : Number,
-        status      : 'wait', // wait | right | wrong | finished | loading
+        corrected   : [],
+        time        : 0,
+        status      : ref(''), // wait | right | wrong | finished | loading
         inputArea   : String,
 
         timer       : null,

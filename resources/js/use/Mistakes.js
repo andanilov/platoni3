@@ -2,7 +2,7 @@ import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { useFetchPost } from '@/use/FetchPost'
 
-export function useMistakes(update = false) {
+export function useMistakes(startGame = false) {
 
     const store = useStore()
     const STORE = store.state.Mistakes
@@ -12,7 +12,7 @@ export function useMistakes(update = false) {
 
     // -- Set next task
     const setNextTask = () => {
-
+console.log('setNextTask ENTER', STORE.mistakes);
         // - Check if new mistakes exists
         if(!Object.keys(STORE.mistakes).length)
             return isTheEnd()
@@ -84,7 +84,7 @@ export function useMistakes(update = false) {
     // -- Check if the end
     const isTheEnd = async (check = true) => {
 
-        if (check && STORE.mistakes.length)
+        if (check && Object.keys(STORE.mistakes).length)
             return
 
         if (STORE.corrected.length) {
@@ -106,34 +106,43 @@ export function useMistakes(update = false) {
     // -- Load Mistakes
     const updateMistakes = async (start = false) => {
 
-        await request('/get/mistakes')
+        if(STORE.status !== 'loading') {
 
-        if(!response)
-            return
+            // -- set status
+            store.commit('Mistakes/setStatus', 'loading')
 
-        // -- set mistakes to STORE
-        store.commit('Mistakes/setMistakes', response)
+            // -- get mistakes
+            await request('/get/mistakes')
 
-        // -- clear corrected
-        store.commit('Mistakes/setCorrected', [])
+            if(!response)
+                return
 
-        // -- set All mistakes number
-        store.commit('Mistakes/setAllMistakes', Object.keys(response).length)
+            // -- set mistakes to STORE
+            store.commit('Mistakes/setMistakes', response.value)
+
+            // -- clear corrected
+            store.commit('Mistakes/setCorrected', [])
+
+            // -- set All mistakes number
+            store.commit('Mistakes/setAllMistakes', response.value.length)
+        }
 
         // -- start after loading
-        start && setNextTask()
-
+        (startGame && Object.keys(STORE.mistakes).length && setNextTask())
+        || store.commit('Mistakes/setStatus', 'wait')
     }
 
 
 
     // -- Mistakes Loading model
-    (!STORE.mistakes.length || update) && updateMistakes()
+    if(!Object.keys(STORE.mistakes).length) {
+        updateMistakes()
+    }
 
 
 
     // -- Start Mistakes quest
-    const startMistakesQuest = () => {
+    const startMistakesQuest = async () => {
 
         if(!Object.keys(STORE.mistakes).length)
             updateMistakes('start')

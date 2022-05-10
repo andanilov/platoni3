@@ -1,10 +1,10 @@
 <template>
-
-    <nav-bar/>
-    <hr/>
-    <slot/>
-    <footer-bar/>
-
+    <div class=" relative max-w-5xl mx-auto">
+        <nav-bar/>
+        <hr/>
+        <slot/>
+        <footer-bar/>
+    </div>
 </template>
 
 <script setup>

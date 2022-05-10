@@ -1,7 +1,7 @@
 <template>
 
     <Link href="/Mistakes">
-        <div class="fixed top-10 right-4 z-50 w-[4rem]">
+        <div class=" absolute top-10 right-4 z-50 w-[4rem]">
 
             <div class="relative aspect-square m-1 flex">
 
@@ -10,7 +10,7 @@
                 :class="{'animate-ping' : mistakes.length >= maxMistakes}"
                 :style="mistakes.length >= maxMistakes
                             ? 'background: red'
-                            : 'background: ' + useGradientSegment( Math.round(mistakes.length * 100 / maxMistakes) , '#dc2626', '#fef2f2')">
+                            : 'background: ' + useGradientSegment( Math.round(mistakes.length * 100 / maxMistakes) , '#dc2626')">
                 </div>
 
                 <!-- <div class="relative flex place-items-center rounded-full z-10 border-white border-8 aspect-square">&nbsp; -->

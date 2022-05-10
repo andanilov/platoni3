@@ -29,22 +29,14 @@ import CheckMistakes from '@/components/CheckMistakes'
 import MistakesFinished from '@/components/MistakesFinished'
 import Loading from '@/components/Loading'
 
-// import { useQuest } from '@/use/Quest'
-
-// const props = defineProps({ mistakes: Object })
-
-// // -- Quest initialisation
-// const { taskStatus } = useQuest(props.quest)
-
 const {
     mistakes,
     taskStatus,
     currentTask,
     corrected,
     startMistakesQuest
-} = useMistakes()
+} = useMistakes('start quest')
 
 // -- Start mistakes quest
-startMistakesQuest()
-
+// startMistakesQuest()
 </script>

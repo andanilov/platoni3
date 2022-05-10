@@ -3,7 +3,7 @@ import { ref } from 'vue'
 export function useFetch() {
 
     let response    = ref()
-    let loading     = ref()
+    let loading     = ref(false)
 
     const request = async (url, options = []) => {
 
@@ -13,7 +13,6 @@ export function useFetch() {
         response.value = await res.json()
 
         loading.value = false
-
     }
 
     return {
@@ -21,5 +20,4 @@ export function useFetch() {
         response,
         request
     }
-
 }

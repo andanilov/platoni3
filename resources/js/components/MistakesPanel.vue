@@ -13,7 +13,7 @@
         </div>
         <div class="w-1/10 text-right min-w-fit ">
             <span class="px-2 py-[.2em] mx-1 bg-lime-500 text-white rounded-lg">{{ corrected.length }}</span>
-            <span class="px-2 py-[.2em] mx-1 bg-stone-100 rounded-lg">{{ mistakes.length}}</span>
+            <span class="px-2 py-[.2em] mx-1 bg-stone-100 rounded-lg">{{ mistakes.length + (currentTask ? 1 : 0)}}</span>
             <span class="px-2 py-[.2em] mx-1 bg-red-400 text-white rounded-lg">{{ allMistakes - mistakes.length - corrected.length - (currentTask ? 1 : 0) }}</span>
         </div>
     </div>
@@ -32,5 +32,7 @@ const {
     allMistakes,
     currentTask,
 } = useMistakes()
+
+console.log('TIME = ', time);
 
 </script>

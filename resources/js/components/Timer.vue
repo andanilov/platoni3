@@ -20,5 +20,5 @@ import BaseIcon from '@/icons/BaseIcon'
 const props = defineProps({
     time: Number,
     animation: Boolean
-    })
+})
 </script>
