@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Quests;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 
 class QuestsController extends Controller
@@ -16,6 +17,16 @@ class QuestsController extends Controller
     {
         $this->questsMap = new Quests();
     }
+
+
+
+    public function index()
+    {
+        return Inertia::render('Quests', [
+            'user' => Auth::user(),
+        ]);
+    }
+
 
 
     public function getMap()

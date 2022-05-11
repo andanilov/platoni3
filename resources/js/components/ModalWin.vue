@@ -1,6 +1,6 @@
 <template>
 
-    <div class="z-40 absolute inset-0 backdrop-blur-[2px] bg-black/10 flex flex-col justify-center items-center"
+    <div class="z-40 fixed inset-0 backdrop-blur-[2px] bg-black/10 flex flex-col justify-center items-center"
     @click="toggle"
     >
         <div class="w-full max-w-sm sm:max-w-md bg-white shadow-md rounded-lg divide-y divide-grey-200"

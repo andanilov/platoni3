@@ -9,7 +9,7 @@
             :style="{ background : !quest.passedNum
                 ? '#f5f5f4'
                 : quest.passedNum === quest.count
-                    ? '#f9f9f9'
+                    ? '#a3e635'
                     : useGradientSegment( Math.round(quest.passedNum * 100 / quest.count) , '#a3e635', '#f5f5f4')}">
             </div>
 

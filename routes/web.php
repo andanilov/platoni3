@@ -8,6 +8,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\QuestsController;
 use App\Http\Controllers\QuestController;
 use App\Http\Controllers\MistakesController;
+use App\Http\Controllers\HistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,8 +58,10 @@ Route::middleware([
 
 // --- Guests
 
-Route::get('/',        [IndexController::class, 'index']);
-Route::get('/login',   [IndexController::class, 'index'])->name('login');
+Route::get('/',             [IndexController::class, 'index']);
+Route::get('/quests',       [QuestsController::class, 'index']);
+Route::get('/history',      [HistoryController::class, 'index']);
+Route::get('/login',        [IndexController::class, 'index'])->name('login');
 Route::get('/quest/{id}',   [QuestController::class, 'index'])->where(['id' => '[0-9]+'])->name('quest');
 
 

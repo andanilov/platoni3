@@ -12,7 +12,7 @@ export function useMistakes(startGame = false) {
 
     // -- Set next task
     const setNextTask = () => {
-console.log('setNextTask ENTER', STORE.mistakes);
+
         // - Check if new mistakes exists
         if(!Object.keys(STORE.mistakes).length)
             return isTheEnd()

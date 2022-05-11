@@ -1,22 +1,20 @@
 <template>
 
 <div class="my-10 flex justify-center flex-wrap"
- :style="{ background : 'linear-gradient(white 47%, #f2f2f2 49%, #f2f2f2 50%, white 51%)'}">
-    <div class="w-1/3 text-right">
+:style="{ background : 'linear-gradient(white 47%, #f2f2f2 49%, #f2f2f2 50%, white 51%)'}">
 
-    </div>
+    <div class="w-1/3 text-right"></div>
+
     <div class="w-1/3">
 
-        <div class="inline-block rounded-md p-[.2em]"
+        <div class="inline-block rounded-md p-[.2em] text-[.9em]"
         :style="{background : gradientBackground }">
             <div class="bg-white rounded-md border-2 py-1 px-3">{{ title }}</div>
         </div>
 
-
     </div>
-    <div class="w-1/3 text-left">
 
-    </div>
+    <div class="w-1/3 text-left"></div>
 
 </div>
 

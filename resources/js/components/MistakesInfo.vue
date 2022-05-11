@@ -1,7 +1,7 @@
 <template>
 
     <Link href="/Mistakes">
-        <div class=" absolute top-10 right-4 z-50 w-[4rem]">
+        <div class=" absolute top-16 right-4 z-40 w-[4rem]">
 
             <div class="relative aspect-square m-1 flex">
 
@@ -14,7 +14,7 @@
                 </div>
 
                 <!-- <div class="relative flex place-items-center rounded-full z-10 border-white border-8 aspect-square">&nbsp; -->
-                <div class="m-1 relative flex justify-center items-center rounded-full z-10 bg-red-400 border-4 aspect-square
+                <div class="m-1 relative flex justify-center items-center rounded-full z-10 bg-red-400 border-4 border-white aspect-square
                 text-[1.5rem] sm:text-[2rem] text-white">
                     {{ mistakes.length }}
                 </div>
@@ -35,6 +35,4 @@ import { Link } from '@inertiajs/inertia-vue3'
 import { useGradientSegment } from '@/use/GradientSegment'
 
 const { mistakes, maxMistakes } = useMistakes()
-
-console.log(mistakes, maxMistakes);
 </script>

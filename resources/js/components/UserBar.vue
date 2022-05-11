@@ -12,10 +12,20 @@
         </dropdown-menu>
     </div>
 
-    <div v-else>
+    <div v-else class="pt-3">
 
-        <button @click="registerToggle">Регистрация</button>&nbsp;
-        <button @click="loginToggle">Вход</button>
+        <button @click="registerToggle">
+            <base-icon class="mx-1"
+            name="register"
+            width="24"
+            opacity="0.4"/>
+        </button>
+        <button @click="loginToggle">
+            <base-icon class="mx-1"
+            name="login"
+            width="24"
+            opacity="0.4"/>
+        </button>
 
         <modal-win
         v-if="loginShow"
@@ -35,47 +45,26 @@
 
 </template>
 
-<script>
+<script setup>
 import ModalWin from '@/components/ModalWin'
 import DropdownMenu from '@/components/DropdownMenu'
 import Login from '@/Pages/Auth/Login'
 import Register from '@/Pages/Auth/Register'
-
+import BaseIcon from '@/icons/BaseIcon'
 import { Inertia } from '@inertiajs/inertia';
 import { Link } from '@inertiajs/inertia-vue3'
-import { computed, onUpdated, onUnmounted, onMounted, watchEffect     } from 'vue'
-
+import { computed } from 'vue'
 import { useGetUser } from '@/use/GetUser'
 import { useToggle } from '@/use/Toggle'
 
+// -- Get and update current user
+const currentUser = computed(() => useGetUser())
 
-export default {
+let { show: loginShow, toggle: loginToggle } = useToggle()
+let { show: registerShow, toggle: registerToggle } = useToggle()
 
-    components: {
-        ModalWin, DropdownMenu,
-        Login, Register, Inertia, Link
-    },
-
-    // methods: {
-    //     out() { Inertia.post(route('logout')) }
-    // },
-
-    setup() {
-
-        let { show: loginShow, toggle: loginToggle } = useToggle()
-        let { show: registerShow, toggle: registerToggle } = useToggle()
-
-        let currentUser = computed( () => useGetUser() )
-
-        return {
-            currentUser,
-            loginShow, loginToggle,
-            registerShow, registerToggle,
-            out: () => {
-                Inertia.post(route('logout') )
-                loginShow.value = registerShow.value = false
-            }
-        }
-    },
+const out = () => {
+    Inertia.post(route('logout') )
+    loginShow.value = registerShow.value = false
 }
 </script>
