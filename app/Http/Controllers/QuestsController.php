@@ -49,13 +49,17 @@ class QuestsController extends Controller
                 'nextId'    => $prog->nextId ?? 0,
                 'passedNum' => $prog->passedNum ?? 0
             ];
-
+// echo "<pre>";
+// print_r($progressMap);
+// echo "</pre>";
 
         // - Set quest map with user progress for front end
         foreach($this->questsMap->getQuestsMap() as $quests) {
 
             $currentProgress = $progressMap[ $quests->level ][ $quests->quest_name ] ?? [];
-
+// echo "<pre>";
+// print_r($currentProgress);
+// echo "</pre>";
             // -- level chenged
             if( $currLvl != $quests->level ) {
 
@@ -78,10 +82,16 @@ class QuestsController extends Controller
             // - Increase level quest all number
             $currCount += $quests->count;
 
+// echo "1 -> " . array_key_exists('nextId', $currentProgress) . "\n";
+// echo "2 -> " . $currentProgress['nextId'] . "\n";
+// echo "3 -> " . $quests->lastId . "\n\n";
+
             // PreSet output rows
             $qCurrentId = $currentProgress['currentId'] ?? $quests->firstId;
             $qPassedNum = $currentProgress['passedNum'] ?? 0;
-            $qNextId = array_key_exists('nextId', $currentProgress) && $currentProgress['nextId'] > 0 && $currentProgress['nextId'] < $quests->lastId
+            $qNextId = ( array_key_exists('nextId', $currentProgress)
+                        && $currentProgress['nextId'] > 0
+                        && $currentProgress['nextId'] <= $quests->lastId )
                             ? $currentProgress['nextId']
                             : ($qCurrentId >= $quests->lastId
                                 ? $quests->lastId
