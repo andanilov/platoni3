@@ -45,10 +45,14 @@ Route::middleware([
         ]);
     })->name('Profile');
 
+    // Route::get('/get/csfr-token', [IndexController::class, 'getCsrfToken'])->name('getCsrfToken');
+
     Route::get('/Mistakes', [MistakesController::class, 'index'])->name('Mistakes');
+    Route::get('/get/history', [HistoryController::class, 'getHistory'])->name('getHistory');
 
     Route::post('/get/mistakes', [MistakesController::class, 'getMistakes'])->name('getMistakes');
     Route::post('/delete/mistakes', [MistakesController::class, 'deleteMistakes'])->name('deleteMistakes');
+
 
 });
 

@@ -1,13 +1,13 @@
 import { useStore } from 'vuex'
 import { ref, computed } from 'vue';
 
-export function useGetUser(user = false) {
+export function useGetUser(user = false, token = false) {
 
     const store = useStore()
 
-    if(user != false)
-        store.commit('User/setUser', computed(() => user))
-
+    user != false &&
+    user != store.state.User.user &&
+    store.commit('User/setUser', computed(() => user))
 
     return store.state.User.user
 }

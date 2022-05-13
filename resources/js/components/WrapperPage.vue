@@ -1,6 +1,7 @@
 <template>
-    <div class=" relative max-w-5xl mx-auto">
+    <div class="relative max-w-5xl mx-auto">
         <nav-bar/>
+        <div class="pt-16"></div>
         <slot/>
         <footer-bar/>
     </div>

@@ -1,31 +1,35 @@
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { useFetch } from '@/use/Fetch'
 import { useFetchPost } from '@/use/FetchPost'
+import { Inertia } from '@inertiajs/inertia'
 
-export function useMistakes(startGame = false) {
+export function useMistakes(mistakesLoaded = []) {
 
     const store = useStore()
     const STORE = store.state.Mistakes
+    const { response : responseGet, request : requestGet, loading : loadingGet } = useFetchPost()
     const { response, request, loading } = useFetchPost()
     const inputId   = 'mistakeInput'
 
 
+// console.log('WELLCOME status / start / Mlen', STORE.status, startGame, Object.keys(STORE.mistakes).length);
+
     // -- Set next task
     const setNextTask = () => {
-
-        // - Check if new mistakes exists
+console.log('-> nextTask allMistakes ', STORE.allMistakes, ' M-len: ', Object.keys(STORE.mistakes).length, ' status: ', );
+        // - Check if quest finished or the first step (before mistakes loading)
         if(!Object.keys(STORE.mistakes).length)
-            return isTheEnd()
-
+            return STORE.allMistakes ? isTheEnd() : updateMistakes('start');
+console.log('-> nextTask BODY-1 CurrentTask = ', STORE.currentTask);
         // - Set current task
         store.commit('Mistakes/setCurrentTask', STORE.mistakes.shift())
-
+console.log('-> nextTask BODY-2 CurrentTask = ', STORE.currentTask);
         // - Set timer
         timerControl()
 
         // - Chahge task status
         store.commit('Mistakes/setStatus', 'wait')
-
     }
 
 
@@ -40,7 +44,7 @@ export function useMistakes(startGame = false) {
         // - Set start time
         store.commit('Mistakes/setTime', STORE.currentTask.time)
 
-
+console.log('--> Timer IN: ', STORE.time, STORE.currentTask.time);
         // - Set timer
         store.commit('Mistakes/setTimer', setInterval( () => {
 
@@ -92,7 +96,6 @@ export function useMistakes(startGame = false) {
             store.commit('Mistakes/setStatus', 'loading')
             await request('/delete/mistakes', { id_mistakes: STORE.corrected })
         }
-
         store.commit('Mistakes/setStatus', 'finished')
     }
 
@@ -103,52 +106,81 @@ export function useMistakes(startGame = false) {
 
 
 
+    // -- Clear Store
+    const clearMistakesStore = () => {
+        store.commit('Mistakes/setMistakes', [])
+        store.commit('Mistakes/setCorrected', [])
+        store.commit('Mistakes/setCurrentTask', [])
+        store.commit('Mistakes/setAllMistakes', 0)
+    }
+
+
+
+    // -- return to the Map
+    const goToMap = () => Inertia.get('/quests')
+
+
+    // -- Repeat mistakes quest
+    const goToRepeatMistakesQuest = () =>
+        STORE.corrected.length === STORE.allMistakes
+        ? Inertia.get('/quests')
+        : updateMistakes('start')
+
+
+
     // -- Load Mistakes
     const updateMistakes = async (start = false) => {
+console.log(`---> ENTER to updateMistakes status: ${STORE.status} / start: ${start}`);
+        // -- If loading mow to stop
+        if (STORE.status === 'loading')
+            return
 
-        if(STORE.status !== 'loading') {
+        // -- clear current and corrected
+        clearMistakesStore()
+console.log('mistakesLoaded = ', mistakesLoaded);
+        // If no loaded data from call useMistakes to load it
+        if (!mistakesLoaded.length || mistakesLoaded.length === 0) {
 
-            // -- set status
+            // -- set status loading
             store.commit('Mistakes/setStatus', 'loading')
 
             // -- get mistakes
-            await request('/get/mistakes')
-
+            await requestGet('/get/mistakes')
             if(!response)
                 return
+            else
+                mistakesLoaded = responseGet.value
 
-            // -- set mistakes to STORE
-            store.commit('Mistakes/setMistakes', response.value)
-
-            // -- clear corrected
-            store.commit('Mistakes/setCorrected', [])
-
-            // -- set All mistakes number
-            store.commit('Mistakes/setAllMistakes', response.value.length)
+            store.commit('Mistakes/setStatus', '')
         }
 
+// console.log('STORE.status ', STORE.status);
+// console.log('LOADED = ', response.value.length);
+
+        // -- set mistakes to STORE
+        store.commit('Mistakes/setMistakes', mistakesLoaded)
+
+        // -- set All mistakes number
+        store.commit('Mistakes/setAllMistakes', mistakesLoaded.length)
+// console.log('STORE AllMistake set to: ', STORE.allMistakes);
+
         // -- start after loading
-        (startGame && Object.keys(STORE.mistakes).length && setNextTask())
-        || store.commit('Mistakes/setStatus', 'wait')
+        start && setNextTask()
+        // (start
+        // && Object.keys(STORE.mistakes).length
+        // && setNextTask())
+        // || store.commit('Mistakes/setStatus', 'wait')
     }
 
 
+    // if(startGame)
+    //     // -- Start Mistakes quest
+    //     updateMistakes('start')
+    // else
+    // // -- Mistakes Loading model
+    // startGame
+    // || (!Object.keys(STORE.mistakes).length && !STORE.status && updateMistakes())
 
-    // -- Mistakes Loading model
-    if(!Object.keys(STORE.mistakes).length) {
-        updateMistakes()
-    }
-
-
-
-    // -- Start Mistakes quest
-    const startMistakesQuest = async () => {
-
-        if(!Object.keys(STORE.mistakes).length)
-            updateMistakes('start')
-        else
-            setNextTask()
-    }
 
 
 
@@ -166,6 +198,9 @@ export function useMistakes(startGame = false) {
         checkAnswer,
         setNextTask,
         finishedTask,
-        startMistakesQuest,
+        goToRepeatMistakesQuest,
+        goToMap,
+        updateMistakes,
+
     }
 }

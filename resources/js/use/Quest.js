@@ -11,7 +11,7 @@ export function useQuest(initQuest = false) {
     const STORE = store.state.Quest
 
     const { deleteInput, setInputStr } = useInput()
-    const { response, request } = useFetchPost()
+    const { response, request, loading } = useFetchPost()
 
 
     // --- Methods ---
@@ -83,9 +83,7 @@ export function useQuest(initQuest = false) {
                 return
 
             // -- Quest Finishing
-
             // - If save needed
-
 
             store.commit('Quest/setStatus', 'loading')
             await request('/add/user_quest', {
@@ -96,14 +94,8 @@ export function useQuest(initQuest = false) {
                 mistakes:       STORE.mistakes,
             })
 
-
-
-
             // - set status = finished
             store.commit('Quest/setStatus', 'finished')
-
-
-
         }
 
 

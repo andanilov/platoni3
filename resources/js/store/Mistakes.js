@@ -7,7 +7,7 @@ const Mistakes = {
     state : () => ({
         mistakes    : {},
         allMistakes : 0,
-        maxMistakes : 10, // max count mistakes to continue quests
+        maxMistakes : 20, // max count mistakes to continue quests
         currentTask : {},
         corrected   : [],
         time        : 0,

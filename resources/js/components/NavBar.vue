@@ -2,7 +2,7 @@
 
     <div class="fixed left-0 right-0 z-50 bg-white">
         <div class="mx-auto max-w-5xl">
-            <div class="flex flex-row gap-2 mt-2 mx-2 pb-1 rounded-xl"
+            <div class="flex flex-row gap-2 mt-2 mx-2 pb-2 rounded-xl"
             style="background: linear-gradient(to bottom, #e5e7eb 4px, #f5f5f5 4px);">
 
                 <div class="basis-1/4 uppercase pl-4"

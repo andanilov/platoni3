@@ -13,10 +13,6 @@ interface QuestControllerI
     public function addUserQuest( Request $request );       // Add user passed quest by POST data
 
     public function generateTask( $params );                // Tasks generate params: min, max, count, count
-
-    public function addition2 ($min, $max);                 // Handler
-
-
 }
 
 
@@ -109,6 +105,7 @@ class QuestController extends Controller implements QuestControllerI
         $stepMax = ceil( ($params->max - $params->min) / $params->count );
         $stepMin = round( $stepMax / 2 );
         $currentMin = $currentMax = $params->min;
+        $negative_enable = +$params->negative_enable;
 
 
         // - Try to call Handler and get one task
@@ -132,10 +129,16 @@ class QuestController extends Controller implements QuestControllerI
                 // Get task
                 do {
 
-                    $res = call_user_func_array( [$this, $params->quest_name], ['min' => $currentMin, 'max' => $currentMax] );
+                    [$res, $correct] = call_user_func_array( [$this, $params->quest_name], ['min' => $currentMin, 'max' => $currentMax] );
 
-                // Repeat, if task already exists
-                } while( in_array($res, $result) && --$attempt > 0 );
+                // Repeat try to generate
+                } while (
+                    // Task already exists or If negativ answer (and not enable)
+                    ( in_array($res, $result) || (!$negative_enable && $correct < 0) )
+
+                    // Maximum attempts
+                    && --$attempt > 0
+                );
 
                 // Set task
                 $result[] = $res;
@@ -146,15 +149,106 @@ class QuestController extends Controller implements QuestControllerI
         }
 
         return $result;
-
     }
 
 
-    // -- addition2
+    // ----- Handlers -----
 
-    public function addition2 ($min, $max)
+
+    private function addition2 ($min, $max)
     {
         return $this->generateSimpleTask($min, $max, 2, ['+']);
+    }
+
+
+
+    private function addition3 ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 3, ['+']);
+    }
+
+
+
+    private function addition2skip ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 2, ['+'], true);
+    }
+
+
+
+    private function addition3skip ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 3, ['+'], true);
+    }
+
+
+
+    private function subtraction2 ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 2, ['-']);
+    }
+
+
+
+    private function subtraction3 ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 3, ['-'] );
+    }
+
+
+
+    private function subtraction2skip ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 2, ['-'], true);
+    }
+
+
+
+    private function subtraction3skip ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 3, ['-'], true);
+    }
+
+
+
+    private function any2 ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 2, ['-', '+'] );
+    }
+
+
+
+    private function any3 ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 3, ['-', '+'] );
+    }
+
+
+
+    private function any2skip ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 2, ['-', '+'], true );
+    }
+
+
+
+    private function any3skip ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 3, ['-', '+'], true );
+    }
+
+
+
+    private function multiplication2 ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 2, ['*'] );
+    }
+
+
+
+    private function multiplication2skip ($min, $max)
+    {
+        return $this->generateSimpleTask($min, $max, 2, ['*'], true );
     }
 
 
@@ -162,6 +256,13 @@ class QuestController extends Controller implements QuestControllerI
 
     private function generateSimpleTask($min = 1, $max = 10, $count = 2, $operations = ['+'], $skip = false)
     {
+
+        // $min            = in_array('min', $options) ? $options['min'] : 1;
+        // $max            = in_array('max', $options) ? $options['max'] : 10;
+        // $count          = in_array('count', $options) ? $options['count'] : 2;
+        // $operations     = in_array('operations', $options) ? $options['operations'] : ['+'];
+        // $skip           = in_array('skip', $options) ? $options['skip'] : false;
+        // $negative       = in_array('negative', $options) ? $options['negative'] : false;
 
         $taskArr    = [];
 
@@ -191,11 +292,11 @@ class QuestController extends Controller implements QuestControllerI
             $replaceKey =  $this->evenRandom ( 0, count($taskArr) - 1 );
             $taskArr[$replaceKey] = '_';
 
-            return $this->outputTaskAsObject ( implode('', $taskArr) . "=" . $correct, $correct);
+            return [$this->outputTaskAsObject ( implode('', $taskArr) . "=" . $correct, $correct), $correct];
 
         // Set ordinary task
         } else {
-            return $this->outputTaskAsObject ($taskStr . '=_', $correct);
+            return [$this->outputTaskAsObject ($taskStr . '=_', $correct), $correct];
         }
     }
 

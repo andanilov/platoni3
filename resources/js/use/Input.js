@@ -48,7 +48,7 @@ console.log($questInput.innerHTML, inputId)
 
 
     return {
-        buttonsModel : [1,2,3,4,5,6,7,8,9,'.',0,'del'],
+        buttonsModel : [1,2,3,4,5,6,7,8,9,'-',0,'del'],
         // inputArea : computed(() => STORE.inputArea),
         // taskArea : computed(() => STORE.taskArea),
         inputId,

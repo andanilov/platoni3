@@ -17,7 +17,7 @@ class IndexController extends Controller
     public function index()
     {
         return Inertia::render('Index', [
-            'user' => Auth::user(),
+            'user' => Auth::user()
         ]);
     }
 

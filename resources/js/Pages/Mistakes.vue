@@ -1,5 +1,11 @@
 <template>
 
+<!-- <pre class="text-[.7em]">
+currentTask {{ currentTask }}<br/>
+corrected {{ corrected }}<br/>
+mistakes {{ mistakes }}<br/>
+</pre> -->
+
 <div class="max-w-3xl mx-auto p-3">
 
     <loading v-if="taskStatus === 'loading'"/>
@@ -18,7 +24,6 @@
 
 </div>
 
-
 </template>
 
 <script setup>
@@ -29,14 +34,20 @@ import CheckMistakes from '@/components/CheckMistakes'
 import MistakesFinished from '@/components/MistakesFinished'
 import Loading from '@/components/Loading'
 
+const props = defineProps({mistakes: Object})
+
+console.log('<<<<<<<<<<<<<<<<<<<<< Mistakes.vue >>>>>>>>>>>>>>>>>>>>>>>>>');
 const {
+    setNextTask,
     mistakes,
     taskStatus,
     currentTask,
     corrected,
-    startMistakesQuest
-} = useMistakes('start quest')
+    startMistakesQuest,
+} = useMistakes(props.mistakes.original[0])
+setNextTask()
 
-// -- Start mistakes quest
-// startMistakesQuest()
+console.log(props.mistakes.original[0]);
+
+console.log('<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>');
 </script>

@@ -11,6 +11,10 @@
 import { computed, watchEffect, ref } from 'vue'
 import { useGetUser } from '@/use/GetUser.js'
 import WrapperPage from '@/components/WrapperPage.vue'
+import { Inertia } from '@inertiajs/inertia'
+
+// import { Link } from '@inertiajs/inertia-vue3'
+
 
 const props = defineProps({ user : Object })
 
@@ -18,3 +22,4 @@ const props = defineProps({ user : Object })
 const currentUser = ref(computed(() => useGetUser(props.user)))
 computed(() => { useGetUser(props.user) })
 </script>
+

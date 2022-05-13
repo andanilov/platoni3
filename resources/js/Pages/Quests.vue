@@ -7,7 +7,7 @@
 
         <div v-else>
 
-            <mistakes-info v-if="mistakes.length" class=" aspect-square"/>
+            <mistakes-info class="aspect-square"/>
 
             <div class="flex flex-col-reverse">
                 <levels-output
@@ -19,11 +19,15 @@
         </div>
 
     </wrapper-page>
+<!-- <pre class="text-[.8em]">
+questsMap: {{ questsMap }}
+</pre> -->
 
 </template>
 
+
 <script setup>
-import { computed, watchEffect, ref } from 'vue'
+import { computed, watchEffect, ref, watch } from 'vue'
 import { useGetUser } from '@/use/GetUser.js'
 import { useQuestsMap } from'@/use/QuestsMap'
 import { useMistakes } from'@/use/Mistakes'
@@ -40,14 +44,15 @@ computed(() => { useGetUser(props.user) })
 
 
 // -- Get and update quests map (when user logged)
-const { loading : loadingMap, questsMap, updateQuestsMap }  = useQuestsMap()
-watchEffect(() => { updateQuestsMap(props.user) } )
+const {
+    loading : loadingMap,
+    questsMap,
+    updateQuestsMap }  = useQuestsMap()
+// watchEffect(() => { updateQuestsMap(props.user) } )
 
 
-// -- Set mistakes
-// const { mistakes } = useMistakes()
-const { mistakes } = useMistakes(props.user)
-// watchEffect(() => { useMistakes(props.user) } )
+
+
 
 
 </script>

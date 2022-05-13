@@ -35,6 +35,7 @@ class Quest extends Model implements QuestTpl
                 `quest_levels_templates`.`max`,
                 `quest_levels_templates`.`time`,
                 `quest_levels_templates`.`count`,
+                `quest_levels_templates`.`negative_enable`,
 
                 (SELECT MIN(`id`)
                     FROM `quests_map` AS `quests_map_1`

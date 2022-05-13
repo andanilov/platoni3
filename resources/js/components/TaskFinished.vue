@@ -54,7 +54,7 @@
 
 
     <Link class="px-3"
-    href="/" >
+    href="/quests" >
         <but type="info" class="w-full">На карту</but>
     </Link>
 

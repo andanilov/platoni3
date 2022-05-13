@@ -6,8 +6,8 @@
     ">
 
         <but
-        v-if="butGoTo"
-        :type="butGoTo"
+        v-if="taskStatus === 'right' || taskStatus === 'wrong'"
+        :type="taskStatus === 'right' ? 'ok' : 'error'"
         @click="setNextTask()">Далее</but>
 
         <but
@@ -17,7 +17,8 @@
 
     </div>
 
-
+<!-- taskStatus = {{ taskStatus }}<br/>
+butGoTo = {{ butGoTo }} -->
 </template>
 
 <script setup>
@@ -33,11 +34,11 @@ const { checkAnswer,
         setNextTask,
 } = useQuest()
 
-let butGoTo = false
-if (taskStatus === 'right')
-    butGoTo = 'ok'
-else if (taskStatus === 'wrong')
-    butGoTo = 'error'
+// let butGoTo = false
+// if (taskStatus === 'right')
+//     butGoTo = 'ok'
+// else if (taskStatus === 'wrong')
+//     butGoTo = 'error'
 
 
 </script>

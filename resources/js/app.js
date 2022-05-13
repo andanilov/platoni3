@@ -5,6 +5,9 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import store from '@/store'
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 createInertiaApp({
@@ -14,6 +17,7 @@ createInertiaApp({
         return createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(store)
+            .use(VueAxios, axios)
             .mixin({ methods: { route } })
             .mount(el);
     },

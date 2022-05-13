@@ -28,7 +28,9 @@
         "vue-loader": "^17.0.0"
     },
     "dependencies": {
+        "js-cookie": "^3.0.1",
         "sass-loader": "^10.0.0-rc.0",
+        "vue-axios": "^3.4.1",
         "vuex": "^4.0.2"
     }
 }

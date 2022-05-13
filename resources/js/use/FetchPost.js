@@ -1,21 +1,30 @@
-import { useFetch } from '@/use/Fetch'
-import { useCsrfToken } from '@/use/CsrfToken'
+import { ref } from 'vue'
+import axios from 'axios'
+import { useCookie } from '@/use/Cookie'
 
 export function useFetchPost () {
 
-    const { response, loading, request : requestPost } = useFetch()
+    const loading = ref(false)
+    const response = ref()
 
-    const request = async (url, data) =>
+    const request = async (url, data) => {
 
-        await requestPost(url, {
-            method:     'POST',
-            credentials: 'same-origin',
-            headers:    {
-                'Content-Type': 'application/json', //'application/x-www-form-urlencoded'
-                'X-CSRF-Token': useCsrfToken()
-            },
-            body:       JSON.stringify(data) // body data type must match "Content-Type" header
-          })
+        loading.value = true
+
+        !useCookie('XSRF-TOKEN') && await axios.get('/sanctum/csrf-cookie')
+
+        const res = await axios({
+            method: 'post',
+            url: url,
+            data: data
+          });
+        response.value = res.data
+
+        loading.value = false
+
+    }
 
     return { response, request, loading }
 }
+
+
