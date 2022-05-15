@@ -19,15 +19,13 @@
             :quest="quest"
             :user="user"
             :key="questsId + quest.questName"
+            :noLink="allMistakes >= maxMistakes"
             />
 
         </div>
 
     </div>
 
-<!-- <pre>
-{{ questsModel }}
-</pre> -->
 
 
 </template>
@@ -36,11 +34,20 @@
 import QuestOutput from '@/components/QuestOutput'
 import LevelTitle from '@/components/LevelTitle'
 import SemiHidden from '@/components/SemiHidden'
+import { useMistakes } from '@/use/Mistakes'
+import { computed } from 'vue'
 
 const props = defineProps({
     user : Object,
     questsModel : Object
 })
+
+const {
+    allMistakes,
+    maxMistakes,
+} = useMistakes()
+
+// const noLink = computed(() => allMistakes >= maxMistakes)
 
 const getProgressQuestLevel = quests =>
     quests.length == 1

@@ -68,7 +68,6 @@ Route::get('/history',      [HistoryController::class, 'index']);
 Route::get('/login',        [IndexController::class, 'index'])->name('login');
 Route::get('/quest/{id}',   [QuestController::class, 'index'])->where(['id' => '[0-9]+'])->name('quest');
 
-
 // --- XHR
 
 Route::post('/add/user_quest', [QuestController::class, 'addUserQuest'])->name('addUserQuest');

@@ -1,9 +1,24 @@
 <template>
 
 <wrapper-page :currentUser="currentUser">
-    <div class="px-2 pt-5">
+    <div class="px-2">
 
-        <table class="w-full text-center">
+        <message class="z-50"
+        v-if="!currentUser"
+        type="info"
+        title="Авторизируйтесь!">
+            Чтобы получить доступ ко всем занятиям и сохранять прогресс, зарецвпфцвпцУПВистрируйтесь и войдите!
+        </message>
+
+        <message class="z-50"
+        v-else-if="!history.length"
+        type="info"
+        title="История занятий">
+            Пройдите первый тест, чтобы начать историю!
+        </message>
+
+        <table class="w-full text-center mt-5"
+        v-else>
 
             <thead class="text-[.7em] border-b-stone-200 border-b-2">
                 <tr>
@@ -48,6 +63,7 @@
     </div>
 </wrapper-page>
 
+
 </template>
 
 <script setup>
@@ -55,13 +71,23 @@ import { computed, ref } from 'vue'
 import { useGetUser } from '@/use/GetUser.js'
 import { useSort } from '@/use/Sort.js'
 import WrapperPage from '@/components/WrapperPage.vue'
+import Message from '@/components/Message'
+
+// -- Get and update current user
+const currentUser = ref(computed(() => useGetUser(props.user)))
+computed(() => { useGetUser(props.user) })
+
 
 const props = defineProps({
     user : Object,
     history: Object
 })
 
-let history = useSort(props.history.original, 'created')
+let history = []
+
+// -- Get history for user (no guest)
+history = computed(() => useSort(props.history.original, 'created'))
+
 
 // -- Sorting
 const sortTypes = {
@@ -76,7 +102,6 @@ const srt = (col) => {
     currentSort.value = col
 }
 
-// -- Get and update current user
-const currentUser = ref(computed(() => useGetUser(props.user)))
-computed(() => { useGetUser(props.user) })
+
+
 </script>

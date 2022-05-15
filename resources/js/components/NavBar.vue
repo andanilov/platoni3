@@ -5,11 +5,12 @@
             <div class="flex flex-row gap-2 mt-2 mx-2 pb-2 rounded-xl"
             style="background: linear-gradient(to bottom, #e5e7eb 4px, #f5f5f5 4px);">
 
-                <div class="basis-1/4 uppercase pl-4"
+                <div class="basis-1/4 pl-4"
                 style="font-family: 'Comfortaa', cursive;">
-                    <Link href="/" class="inline-block top-navi pt-4"
+                    <Link href="/" class="inline-block top-navi pt-4 leading-3"
                     :class="{'selected': currentRoute === '/'}">
-                        Платони
+                        <span class="uppercase">Платони</span><br/>
+                        <span class=" lowercase text-[.6em]">Учимся&nbsp;считать</span>
                     </Link>
                 </div>
 
@@ -17,7 +18,7 @@
                     <nav-menu/>
                 </div>
 
-                <div class="basis-1/4 text-right pr-2">
+                <div class="basis-1/4 text-right pr-4">
                     <user-bar/>
                 </div>
 

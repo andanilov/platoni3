@@ -33,7 +33,9 @@ class HistoryController extends Controller
 
     public function getHistory()
     {
-        return $this->model->getHistory(Auth::user()->id);
+        return Auth::user()
+            ? $this->model->getHistory(Auth::user()->id)
+            : [];
     }
 
 }

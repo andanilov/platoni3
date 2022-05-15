@@ -2,12 +2,36 @@
 
     <wrapper-page :currentUser="currentUser">
 
-        <div class=""
-        v-if="loadingMap">LOADING!!</div>
+        <loading v-if="loadingMap"/>
 
         <div v-else>
 
-            <mistakes-info class="aspect-square"/>
+            <div class="fixed z-40 top-16 left-0 right-0 flex flex-row items-center max-h-full justify-evenly px-4 gap-4 max-w-5xl mx-auto">
+
+                <message class="z-50"
+                v-if="user && allMistakes >= maxMistakes"
+                type="error"
+                title="Исправьте ошибки!">
+                    Для продолжения занятий необходимо исправить накопившиеся ошибки!
+                </message>
+
+                <message class="z-50"
+                v-if="!currentUser"
+                type="info"
+                title="Авторизируйтесь!">
+                    Чтобы получить доступ ко всем занятиям и сохранять прогресс, зарегистрируйтесь и войдите!
+                </message>
+
+                <mistakes-info class="aspect-square"
+                v-if="user && allMistakes"
+                :allMistakes="allMistakes"
+                :maxMistakes="maxMistakes"/>
+
+
+            </div>
+
+            <mistakes-info class="aspect-square"
+            v-if="user"/>
 
             <div class="flex flex-col-reverse">
                 <levels-output
@@ -19,21 +43,19 @@
         </div>
 
     </wrapper-page>
-<!-- <pre class="text-[.8em]">
-questsMap: {{ questsMap }}
-</pre> -->
 
 </template>
 
-
 <script setup>
-import { computed, watchEffect, ref, watch } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useGetUser } from '@/use/GetUser.js'
 import { useQuestsMap } from'@/use/QuestsMap'
 import { useMistakes } from'@/use/Mistakes'
 import WrapperPage from '@/components/WrapperPage.vue'
 import LevelsOutput from '@/components/LevelsOutput'
 import MistakesInfo from '@/components/MistakesInfo'
+import Message from '@/components/Message'
+import Loading from '@/components/Loading'
 
 
 const props = defineProps({ user : Object })
@@ -48,11 +70,13 @@ const {
     loading : loadingMap,
     questsMap,
     updateQuestsMap }  = useQuestsMap()
-// watchEffect(() => { updateQuestsMap(props.user) } )
 
+// -- Mistakes
+const {
+    updateMistakes,
+    allMistakes,
+    maxMistakes,
+} = useMistakes()
 
-
-
-
-
+currentUser.value && updateMistakes()
 </script>

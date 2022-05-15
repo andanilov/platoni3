@@ -2,7 +2,7 @@
 
     <div class="relative aspect-square w-[7rem] m-1">
 
-        <Link :href="`/quest/${quest.nextId}`">
+        <Link :href="noLink ? '' : `/quest/${quest.nextId}`">
 
             <!-- Progress circle -->
             <div class="absolute inset-x-0 bottom-0 h-full rounded-full"
@@ -42,8 +42,6 @@
 
     </div>
 
-
-
 </template>
 
 <script setup>
@@ -53,18 +51,13 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 const props = defineProps({
     user  : Object,
-    quest : Object
+    quest : Object,
+    noLink: Boolean,
 })
 
-// console.log(props.user);
 
-if(props.user) {
-
-
-} else  {
-
+if (!props.user) {
     const progress = 0
-
 }
 
 </script>

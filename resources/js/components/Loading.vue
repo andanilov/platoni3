@@ -1,6 +1,6 @@
 <template>
 
-    <div class="absolute inset-0 flex flex-col justify-center items-center">
+    <div class="fixed inset-0 flex flex-col justify-center items-center">
         <div class="lds-ripple"><div></div><div></div></div>
     </div>
 

@@ -48,18 +48,16 @@ export function useQuest(initQuest = false) {
             // Stop timer
             clearInterval(STORE.timer)
 
-            // Correct
-            if(store.state.Input.inputArea == STORE.currentTask.correct) {
-
-                store.commit('Quest/setAnswers', [...STORE.answers, { answer: store.state.Input.inputArea, ...STORE.currentTask }])
-                store.commit('Quest/setStatus', 'right')
-            }
-
             // Mistake
-            else {
-
+            if (store.state.Input.inputArea.trim() === '' || +(store.state.Input.inputArea) != +STORE.currentTask.correct) {
                 store.commit('Quest/setMistakes', [...STORE.mistakes, { answer: store.state.Input.inputArea, ...STORE.currentTask }] )
                 store.commit('Quest/setStatus', 'wrong')
+            }
+
+            // Correct
+            else {
+                store.commit('Quest/setAnswers', [...STORE.answers, { answer: store.state.Input.inputArea, ...STORE.currentTask }])
+                store.commit('Quest/setStatus', 'right')
             }
 
             // -- add task period to quest period

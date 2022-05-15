@@ -13,18 +13,13 @@ export function useMistakes(mistakesLoaded = []) {
     const inputId   = 'mistakeInput'
 
 
-// console.log('WELLCOME status / start / Mlen', STORE.status, startGame, Object.keys(STORE.mistakes).length);
-
     // -- Set next task
     const setNextTask = () => {
-console.log('-> nextTask allMistakes ', STORE.allMistakes, ' M-len: ', Object.keys(STORE.mistakes).length, ' status: ', );
         // - Check if quest finished or the first step (before mistakes loading)
         if(!Object.keys(STORE.mistakes).length)
             return STORE.allMistakes ? isTheEnd() : updateMistakes('start');
-console.log('-> nextTask BODY-1 CurrentTask = ', STORE.currentTask);
         // - Set current task
         store.commit('Mistakes/setCurrentTask', STORE.mistakes.shift())
-console.log('-> nextTask BODY-2 CurrentTask = ', STORE.currentTask);
         // - Set timer
         timerControl()
 
@@ -40,11 +35,9 @@ console.log('-> nextTask BODY-2 CurrentTask = ', STORE.currentTask);
         // If interval exists
         STORE.timer && clearInterval(STORE.timer)
 
-
         // - Set start time
         store.commit('Mistakes/setTime', STORE.currentTask.time)
 
-console.log('--> Timer IN: ', STORE.time, STORE.currentTask.time);
         // - Set timer
         store.commit('Mistakes/setTimer', setInterval( () => {
 
@@ -52,8 +45,6 @@ console.log('--> Timer IN: ', STORE.time, STORE.currentTask.time);
 
             if(STORE.time === 0)
                 checkAnswer()
-
-
         }, 1000))
     }
 
@@ -78,9 +69,6 @@ console.log('--> Timer IN: ', STORE.time, STORE.currentTask.time);
 
         // Check is there the end
         isTheEnd()
-
-        // Goto next task
-        //setNextTask()
     }
 
 
@@ -130,14 +118,13 @@ console.log('--> Timer IN: ', STORE.time, STORE.currentTask.time);
 
     // -- Load Mistakes
     const updateMistakes = async (start = false) => {
-console.log(`---> ENTER to updateMistakes status: ${STORE.status} / start: ${start}`);
         // -- If loading mow to stop
         if (STORE.status === 'loading')
             return
 
         // -- clear current and corrected
         clearMistakesStore()
-console.log('mistakesLoaded = ', mistakesLoaded);
+
         // If no loaded data from call useMistakes to load it
         if (!mistakesLoaded.length || mistakesLoaded.length === 0) {
 
@@ -154,35 +141,15 @@ console.log('mistakesLoaded = ', mistakesLoaded);
             store.commit('Mistakes/setStatus', '')
         }
 
-// console.log('STORE.status ', STORE.status);
-// console.log('LOADED = ', response.value.length);
-
         // -- set mistakes to STORE
         store.commit('Mistakes/setMistakes', mistakesLoaded)
 
         // -- set All mistakes number
         store.commit('Mistakes/setAllMistakes', mistakesLoaded.length)
-// console.log('STORE AllMistake set to: ', STORE.allMistakes);
 
         // -- start after loading
         start && setNextTask()
-        // (start
-        // && Object.keys(STORE.mistakes).length
-        // && setNextTask())
-        // || store.commit('Mistakes/setStatus', 'wait')
     }
-
-
-    // if(startGame)
-    //     // -- Start Mistakes quest
-    //     updateMistakes('start')
-    // else
-    // // -- Mistakes Loading model
-    // startGame
-    // || (!Object.keys(STORE.mistakes).length && !STORE.status && updateMistakes())
-
-
-
 
 
     return {

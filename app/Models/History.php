@@ -17,22 +17,73 @@ class History extends Model
         $id_user = $id_user ?? Auth::user()->id();
 
         return DB::select("SELECT
-                        DATE(`created_at`) AS `created`,
-                        SUM(`answers_num`) AS `corrects`,
-                        SUM(`mistakes_num`) AS `mistakes`,
-                        COUNT(`quests_users`.`id`) AS `all`,
-                        SUM(`quests_map`.`level`) / COUNT(`quests_users`.`id`) AS `level`,
-                        (SELECT COUNT(`quests_users_1`.`id`) FROM `quests_users` AS `quests_users_1`
-                            WHERE DATE(`quests_users_1`.`created_at`) = DATE(`quests_users`.`created_at`)
-                            AND `quests_users_1`.`mistakes_num` < 3)
-                            AS `win`
-                        FROM `quests_users`, `quests_map`
-                        WHERE `quests_users`.`id_user` = :id_user
-                        AND `quests_map`.`id` = `quests_users`.`id_quest_map`
-                        GROUP BY `created`
-                        ORDER BY `created` DESC
-                        ", ['id_user' => $id_user]);
+            DATE(`created_at`) AS `created`,
+            SUM(`answers_num`) AS `corrects`,
+            SUM(`mistakes_num`) AS `mistakes`,
+            COUNT(`quests_users`.`id`) AS `all`,
+            SUM(`quests_map`.`level`) / COUNT(`quests_users`.`id`) AS `level`,
+            (SELECT COUNT(`quests_users_1`.`id`) FROM `quests_users` AS `quests_users_1`
+                WHERE DATE(`quests_users_1`.`created_at`) = DATE(`quests_users`.`created_at`)
+                AND `quests_users_1`.`mistakes_num` < 3)
+                AS `win`
+            FROM `quests_users`, `quests_map`
+            WHERE `quests_users`.`id_user` = :id_user
+            AND `quests_map`.`id` = `quests_users`.`id_quest_map`
+            GROUP BY `created`
+            ORDER BY `created` DESC
+            ", ['id_user' => $id_user]);
     }
+
+
+    public function getUserCount ()
+    {
+        return DB::select("SELECT COUNT(`id`) AS `users` FROM `users`");
+    }
+
+
+    public function getQuestsCount ($id_user = false)
+    {
+        return $id_user
+
+            ? DB::select("SELECT COUNT(`id`) AS `userQuestsPassed`
+                FROM `quests_users`
+                WHERE `mistakes_num` < 3
+                AND `id_user` = :id_user", ['id_user' => $id_user])
+
+            : DB::select("SELECT COUNT(`id`) AS `quests` FROM `quests_map`");
+    }
+
+
+    public function getTasksCount ($id_user = false)
+    {
+        return $id_user
+
+            ? DB::select("SELECT SUM(`answers_num`) AS `countTasksUsers`
+                FROM `quests_users`
+                WHERE `mistakes_num` < 3
+                AND `id_user` = :id_user", ['id_user' => $id_user])
+
+            : DB::select("SELECT SUM(`quest_levels_templates`.`count`) AS `countTasks`
+                FROM `quests_map`, `quest_levels_templates`
+                WHERE `quests_map`.`id_levels_template` = `quest_levels_templates`.`id`");
+    }
+
+
+    public function getLevelsCount ($id_user = false)
+    {
+        return $id_user
+
+            ? DB::select("SELECT MAX(`quests_map`.`level`) AS `maxUserLevel`
+                FROM `quests_map`, `quests_users`
+                WHERE `quests_users`.`id_quest_map` = `quests_map`.`id`
+                AND `mistakes_num` < 3
+                AND `id_user` = :id_user", ['id_user' => $id_user])
+
+            : DB::select("SELECT MAX(`level`) AS `maxLevel` FROM `quests_map`");
+    }
+
+
+
 
 }
 

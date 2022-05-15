@@ -5,85 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use App\Models\History;
 
 
 class IndexController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $historyModel;
+
+
+    public function __construct()
+    {
+        $this->historyModel = new History();
+    }
+
+
     public function index()
     {
+
         return Inertia::render('Index', [
-            'user' => Auth::user()
+            'user'      => Auth::user(),
+            'users'     => +$this->historyModel->getUserCount()[0]->users,
+            'quests'    => +$this->historyModel->getQuestsCount()[0]->quests,
+            'levels'    => +$this->historyModel->getLevelsCount()[0]->maxLevel,
+            'countTasks'=> +$this->historyModel->getTasksCount()[0]->countTasks,
+
+            'userQuestsPassed'  => Auth::user() ? +$this->historyModel->getLevelsCount()[0]->maxLevel : 0,
+            'countTasksUsers'   => Auth::user() ? +$this->historyModel->getTasksCount(Auth::user()->id)[0]->countTasksUsers : 0,
+            'maxUserLevel'   => Auth::user() ? +$this->historyModel->getLevelsCount(Auth::user()->id)[0]->maxUserLevel : 0,
+
+            // 'statistic' => $this->history->getStatistic()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

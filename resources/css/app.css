@@ -47,10 +47,19 @@
 /* -- Top menu -- */
 
 .top-navi {
-    padding-top:.5em;
+    padding-top:.7rem;
     border-top: 4px solid #e5e7eb;
 }
 
 .top-navi.selected {
     border-top-color: #fdba74;
+}
+
+/* -- Scroll denied -- */
+.scroll-denied {
+    height: 100vh;
+    overflow-y: hidden;
+    position: fixed;
+    right: 0;
+    left: 0;
 }

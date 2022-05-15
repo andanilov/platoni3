@@ -129,12 +129,14 @@ class QuestController extends Controller implements QuestControllerI
                 // Get task
                 do {
 
-                    [$res, $correct] = call_user_func_array( [$this, $params->quest_name], ['min' => $currentMin, 'max' => $currentMax] );
+                    [$res, $correct, $operands] = call_user_func_array( [$this, $params->quest_name], ['min' => $currentMin, 'max' => $currentMax] );
 
                 // Repeat try to generate
                 } while (
-                    // Task already exists or If negativ answer (and not enable)
-                    ( in_array($res, $result) || (!$negative_enable && $correct < 0) )
+
+                    ( in_array($res, $result) // Task already exists
+                    || (!$negative_enable && $correct < 0) // If negativ acorrect (and not enable)
+                    || (count(array_unique($operands)) < count($operands)) ) // Repeat operands
 
                     // Maximum attempts
                     && --$attempt > 0
@@ -257,18 +259,12 @@ class QuestController extends Controller implements QuestControllerI
     private function generateSimpleTask($min = 1, $max = 10, $count = 2, $operations = ['+'], $skip = false)
     {
 
-        // $min            = in_array('min', $options) ? $options['min'] : 1;
-        // $max            = in_array('max', $options) ? $options['max'] : 10;
-        // $count          = in_array('count', $options) ? $options['count'] : 2;
-        // $operations     = in_array('operations', $options) ? $options['operations'] : ['+'];
-        // $skip           = in_array('skip', $options) ? $options['skip'] : false;
-        // $negative       = in_array('negative', $options) ? $options['negative'] : false;
-
         $taskArr    = [];
+        $operands   = [];
 
         do {
 
-            $taskArr[] = rand( $min, $max );
+            $taskArr[] = $operands[] = rand( $min, $max );
             $taskArr[] = $operations [array_rand( $operations )];
 
         } while ( --$count > 0 );
@@ -292,11 +288,11 @@ class QuestController extends Controller implements QuestControllerI
             $replaceKey =  $this->evenRandom ( 0, count($taskArr) - 1 );
             $taskArr[$replaceKey] = '_';
 
-            return [$this->outputTaskAsObject ( implode('', $taskArr) . "=" . $correct, $correct), $correct];
+            return [$this->outputTaskAsObject ( implode('', $taskArr) . "=" . $correct, $correct), $correct, $operands];
 
         // Set ordinary task
         } else {
-            return [$this->outputTaskAsObject ($taskStr . '=_', $correct), $correct];
+            return [$this->outputTaskAsObject ($taskStr . '=_', $correct), $correct, $operands];
         }
     }
 

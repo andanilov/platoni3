@@ -11,7 +11,8 @@ export function useFetchPost () {
 
         loading.value = true
 
-        !useCookie('XSRF-TOKEN') && await axios.get('/sanctum/csrf-cookie')
+        // !useCookie('XSRF-TOKEN') &&
+        await axios.get('/sanctum/csrf-cookie')
 
         const res = await axios({
             method: 'post',

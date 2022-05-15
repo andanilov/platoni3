@@ -4,21 +4,19 @@
     w-full
     sm:w-[50%]
     ">
-
         <but
-        v-if="taskStatus === 'right' || taskStatus === 'wrong'"
-        :type="taskStatus === 'right' ? 'ok' : 'error'"
-        @click="setNextTask()">Далее</but>
-
-        <but
-        v-else
+        v-if="taskStatus != 'right' && taskStatus != 'wrong'"
         type="ok"
         @click="checkAnswer()">Ответить</but>
 
+        <but
+        v-else
+        :type="taskStatus === 'right' ? 'ok' : 'error'"
+        @click="setNextTask()">Далее</but>
+
+
     </div>
 
-<!-- taskStatus = {{ taskStatus }}<br/>
-butGoTo = {{ butGoTo }} -->
 </template>
 
 <script setup>
@@ -33,12 +31,5 @@ const { checkAnswer,
         taskStatus,
         setNextTask,
 } = useQuest()
-
-// let butGoTo = false
-// if (taskStatus === 'right')
-//     butGoTo = 'ok'
-// else if (taskStatus === 'wrong')
-//     butGoTo = 'error'
-
 
 </script>

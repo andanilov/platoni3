@@ -4,14 +4,14 @@
 
         <but
         v-if="taskStatus === 'wrong' || taskStatus === 'right'"
-        type="warning"
-        @click.prevent
-        @click="finishedTask()">Сохранить и выйти</but>
+        :type="taskStatus === 'right' ? 'ok' : 'error'"
+        @click="setNextTask()">Далее</but>
 
         <but
         v-if="taskStatus === 'wrong' || taskStatus === 'right'"
-        :type="taskStatus === 'right' ? 'ok' : 'error'"
-        @click="setNextTask()">Далее</but>
+        type="warning"
+        @click.prevent
+        @click="finishedTask()">Сохранить и выйти</but>
 
         <but
         v-else

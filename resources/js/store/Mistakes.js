@@ -6,7 +6,7 @@ const Mistakes = {
 
     state : () => ({
         mistakes    : {},
-        allMistakes : 0,
+        allMistakes : ref(0),
         maxMistakes : 20, // max count mistakes to continue quests
         currentTask : {},
         corrected   : [],
