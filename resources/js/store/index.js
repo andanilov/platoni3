@@ -4,6 +4,7 @@ import Quest from '@/store/Quest'
 import User from '@/store/User'
 import Mistakes from '@/store/Mistakes'
 import Input from '@/store/Input'
+import GoBack from '@/store/GoBack'
 
 
 const store = createStore({
@@ -14,6 +15,7 @@ const store = createStore({
         Quest,
         Mistakes,
         Input,
+        GoBack,
     }
 
 })

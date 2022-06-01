@@ -2,6 +2,7 @@ import { useStore } from 'vuex'
 import { computed, ref } from 'vue'
 import { useFetchPost } from '@/use/FetchPost'
 import { useInput } from '@/use/Input'
+import { useGoBack } from '@/use/GoBack'
 
 import { Inertia } from '@inertiajs/inertia'
 
@@ -9,6 +10,7 @@ export function useQuest(initQuest = false) {
 
     const store = useStore()
     const STORE = store.state.Quest
+    const { addToGoBackQueue } = useGoBack()
 
     const { deleteInput, setInputStr } = useInput()
     const { response, request, loading } = useFetchPost()
@@ -81,7 +83,7 @@ export function useQuest(initQuest = false) {
                 return
 
             // Timer clear
-            STORE.setTimer && clearInterval(STORE.setTimer)
+            STORE.timer && clearInterval(STORE.timer)
 
             // -- Quest Finishing
             // - If save needed
@@ -106,39 +108,24 @@ export function useQuest(initQuest = false) {
 
         const timerStart = () => {
 
-            STORE.setTimer && clearInterval(STORE.setTimer)
+            STORE.timer && clearInterval(STORE.timer)
 
             store.commit('Quest/setCurrentTime', ref(STORE.time - 1))
 
             // Add and start timer
-            const interval = setInterval( () => {
-
-                console.log('int = ', interval);
+            store.commit('Quest/setTimer', setInterval( () => {
 
                 store.commit('Quest/setCurrentTime', ref(STORE.currentTime - 1))
 
                 if(+STORE.currentTime <= 0) {
-                    clearInterval(STORE.setTimer)
+                    clearInterval(STORE.timer)
                     checkAnswer()
                 }
 
-            }, 1000);
+            }, 1000))
 
-            // console.log('interval BEFORE', STORE.timer);
-            store.commit('Quest/setTimer', interval)
-            // console.log('interval AFTER', STORE.timer);
-
-            // store.commit('Quest/setTimer', setInterval( () => {
-
-            //     store.commit('Quest/setCurrentTime', ref(STORE.currentTime - 1))
-
-            //     if(+STORE.currentTime <= 0) {
-            //         clearInterval(STORE.setTimer)
-            //         checkAnswer()
-            //     }
-
-            // }, 1000))
-
+            // If goBack buttom pressed
+            addToGoBackQueue(() => clearInterval(STORE.timer));
         }
 
 
@@ -180,12 +167,6 @@ export function useQuest(initQuest = false) {
         // -- Set first Tasks
         setNextTask()
 
-    }
-
-
-    // If back buttom click
-    window.onpopstate = function () {
-        STORE.timer && clearInterval(STORE.timer);
     }
 
 

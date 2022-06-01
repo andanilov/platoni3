@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useFetch } from '@/use/Fetch'
 import { useFetchPost } from '@/use/FetchPost'
 import { Inertia } from '@inertiajs/inertia'
+import { useGoBack } from '@/use/GoBack'
 
 export function useMistakes(mistakesLoaded = []) {
 
@@ -11,6 +12,8 @@ export function useMistakes(mistakesLoaded = []) {
     const { response : responseGet, request : requestGet, loading : loadingGet } = useFetchPost()
     const { response, request, loading } = useFetchPost()
     const inputId   = 'mistakeInput'
+
+    const { addToGoBackQueue } = useGoBack()
 
 
     // -- Set next task
@@ -46,6 +49,9 @@ export function useMistakes(mistakesLoaded = []) {
             if(+STORE.time <= 0)
                 checkAnswer()
         }, 1000))
+
+        // If goBack buttom pressed
+        addToGoBackQueue(() => clearInterval(STORE.timer));
     }
 
 
@@ -150,13 +156,6 @@ export function useMistakes(mistakesLoaded = []) {
         // -- start after loading
         start && setNextTask()
     }
-
-
-    // If back buttom click
-    window.onpopstate = function () {
-        STORE.timer && clearInterval(STORE.timer);
-    }
-
 
     return {
         mistakes    : computed( () => STORE.mistakes ),
