@@ -1,10 +1,6 @@
 <template>
 
-<!-- <pre class="text-[.7em]">
-currentTask {{ currentTask }}<br/>
-corrected {{ corrected }}<br/>
-mistakes {{ mistakes }}<br/>
-</pre> -->
+<head-page title="Работа над ошибками"></head-page>
 
 <div class="max-w-3xl mx-auto p-3">
 
@@ -33,10 +29,10 @@ import InputArea from '@/components/InputArea'
 import CheckMistakes from '@/components/CheckMistakes'
 import MistakesFinished from '@/components/MistakesFinished'
 import Loading from '@/components/Loading'
+import HeadPage from '@/components/HeadPage'
 
 const props = defineProps({mistakes: Object})
 
-console.log('<<<<<<<<<<<<<<<<<<<<< Mistakes.vue >>>>>>>>>>>>>>>>>>>>>>>>>');
 const {
     setNextTask,
     mistakes,
@@ -46,8 +42,4 @@ const {
     startMistakesQuest,
 } = useMistakes(props.mistakes.original[0])
 setNextTask()
-
-console.log(props.mistakes.original[0]);
-
-console.log('<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>');
 </script>

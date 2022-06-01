@@ -10,7 +10,7 @@
 <script setup>
 import NavBar from '@/components/NavBar'
 import FooterBar from '@/components/FooterBar'
+import { Head } from '@inertiajs/inertia-vue3'
 
-const props = defineProps({ currentUser: Object })
-
+const props = defineProps({currentUser: Object})
 </script>

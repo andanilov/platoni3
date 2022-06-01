@@ -1,5 +1,7 @@
 <template>
 
+<head-page title="История занятий"></head-page>
+
 <wrapper-page :currentUser="currentUser">
     <div class="px-2">
 
@@ -7,7 +9,7 @@
         v-if="!currentUser"
         type="info"
         title="Авторизируйтесь!">
-            Чтобы получить доступ ко всем занятиям и сохранять прогресс, зарецвпфцвпцУПВистрируйтесь и войдите!
+            Чтобы получить доступ ко всем занятиям и сохранять прогресс, зарегестрируйтесь и войдите!
         </message>
 
         <message class="z-50"
@@ -41,7 +43,7 @@
                 <tr class="border-b-stone-200 border-b-[1px]"
                 v-for="row in history"
                 :key="row.created">
-                    <td class="text-[.8em] py-2">{{ row.created }}</td>
+                    <td class="text-[.8em] py-2">{{ useDateText(row.created) }}</td>
                     <td>
                         <span class=" text-lime-600">{{ row.win }}</span>
                         <span class="text-[.8em]"> / </span>
@@ -70,8 +72,10 @@
 import { computed, ref } from 'vue'
 import { useGetUser } from '@/use/GetUser.js'
 import { useSort } from '@/use/Sort.js'
+import { useDateText } from '@/use/DateText'
 import WrapperPage from '@/components/WrapperPage.vue'
 import Message from '@/components/Message'
+import HeadPage from '@/components/HeadPage'
 
 // -- Get and update current user
 const currentUser = ref(computed(() => useGetUser(props.user)))

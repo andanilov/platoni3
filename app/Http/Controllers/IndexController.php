@@ -30,7 +30,7 @@ class IndexController extends Controller
             'levels'    => +$this->historyModel->getLevelsCount()[0]->maxLevel,
             'countTasks'=> +$this->historyModel->getTasksCount()[0]->countTasks,
 
-            'userQuestsPassed'  => Auth::user() ? +$this->historyModel->getLevelsCount()[0]->maxLevel : 0,
+            'userQuestsPassed'  => Auth::user() ? +$this->historyModel->getLevelsCount(Auth::user()->id)[0]->maxUserLevel : 0,
             'countTasksUsers'   => Auth::user() ? +$this->historyModel->getTasksCount(Auth::user()->id)[0]->countTasksUsers : 0,
             'maxUserLevel'   => Auth::user() ? +$this->historyModel->getLevelsCount(Auth::user()->id)[0]->maxUserLevel : 0,
 

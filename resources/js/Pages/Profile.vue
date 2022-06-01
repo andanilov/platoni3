@@ -1,31 +1,22 @@
 <template>
 
+    <head-page title="Ваш профиль"></head-page>
+
     <wrapper-page :currentUser="currentUser">
-        <h1>Профиль</h1>
+        <message title="Настройки">{{ currentUser.name }}, здесь вы сможете изменить настройки Вашего профиля!</message>
         <profile/>
     </wrapper-page>
 
 </template>
 
-<script>
+<script setup>
 import WrapperPage from '@/components/WrapperPage.vue'
-import Profile from '@/pages/Profile/Show.vue'  
+import Profile from '@/pages/Profile/Show.vue'
+import Message from '@/components/Message'
+import HeadPage from '@/components/HeadPage'
 import { useGetUser } from '@/use/GetUser.js'
 import { computed } from 'vue'
 
-export default {
-
-    components : { 
-        WrapperPage, Profile 
-    },
-
-    props : { user : Object },
-
-    setup(props) {
-
-        return {
-            currentUser : computed(() => useGetUser(props.user))
-        }
-    },
-}
+const props = defineProps({ user : Object })
+let currentUser = computed(() => useGetUser(props.user))
 </script>

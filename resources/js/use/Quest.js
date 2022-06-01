@@ -80,6 +80,9 @@ export function useQuest(initQuest = false) {
             if(STORE.mistakes.length < STORE.lives && STORE.tasks.length != 0)
                 return
 
+            // Timer clear
+            STORE.setTimer && clearInterval(STORE.setTimer)
+
             // -- Quest Finishing
             // - If save needed
 
@@ -103,22 +106,38 @@ export function useQuest(initQuest = false) {
 
         const timerStart = () => {
 
-            if(STORE.setTimer)
-                clearInterval(STORE.setTimer)
+            STORE.setTimer && clearInterval(STORE.setTimer)
 
             store.commit('Quest/setCurrentTime', ref(STORE.time - 1))
 
             // Add and start timer
-            store.commit('Quest/setTimer', setInterval( () => {
+            const interval = setInterval( () => {
+
+                console.log('int = ', interval);
 
                 store.commit('Quest/setCurrentTime', ref(STORE.currentTime - 1))
 
-                if(STORE.currentTime === 0) {
+                if(+STORE.currentTime <= 0) {
                     clearInterval(STORE.setTimer)
                     checkAnswer()
                 }
 
-            }, 1000))
+            }, 1000);
+
+            // console.log('interval BEFORE', STORE.timer);
+            store.commit('Quest/setTimer', interval)
+            // console.log('interval AFTER', STORE.timer);
+
+            // store.commit('Quest/setTimer', setInterval( () => {
+
+            //     store.commit('Quest/setCurrentTime', ref(STORE.currentTime - 1))
+
+            //     if(+STORE.currentTime <= 0) {
+            //         clearInterval(STORE.setTimer)
+            //         checkAnswer()
+            //     }
+
+            // }, 1000))
 
         }
 
@@ -161,6 +180,12 @@ export function useQuest(initQuest = false) {
         // -- Set first Tasks
         setNextTask()
 
+    }
+
+
+    // If back buttom click
+    window.onpopstate = function () {
+        STORE.timer && clearInterval(STORE.timer);
     }
 
 

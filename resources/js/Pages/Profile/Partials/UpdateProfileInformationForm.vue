@@ -74,11 +74,11 @@ const clearPhotoFileInput = () => {
 <template>
     <JetFormSection @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Основные настройки
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Вы можете обновить Ваше имя и почтовый адрес.
         </template>
 
         <template #form>
@@ -108,7 +108,7 @@ const clearPhotoFileInput = () => {
                 </div>
 
                 <JetSecondaryButton class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
-                    Select A New Photo
+                    Выбор фото
                 </JetSecondaryButton>
 
                 <JetSecondaryButton
@@ -117,7 +117,7 @@ const clearPhotoFileInput = () => {
                     class="mt-2"
                     @click.prevent="deletePhoto"
                 >
-                    Remove Photo
+                    Изменить фото
                 </JetSecondaryButton>
 
                 <JetInputError :message="form.errors.photo" class="mt-2" />
@@ -125,7 +125,7 @@ const clearPhotoFileInput = () => {
 
             <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <JetLabel for="name" value="Name" />
+                <JetLabel for="name" value="Имя" />
                 <JetInput
                     id="name"
                     v-model="form.name"
@@ -151,11 +151,11 @@ const clearPhotoFileInput = () => {
 
         <template #actions>
             <JetActionMessage :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Сохранено
             </JetActionMessage>
 
             <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Сохранить
             </JetButton>
         </template>
     </JetFormSection>

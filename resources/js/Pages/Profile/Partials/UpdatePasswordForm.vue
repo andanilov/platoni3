@@ -40,16 +40,16 @@ const updatePassword = () => {
 <template>
     <JetFormSection @submitted="updatePassword">
         <template #title>
-            Update Password
+            Обновить пароль
         </template>
 
         <template #description>
-            Ensure your account is using a long, random password to stay secure.
+            Убедитесь, что в вашей учетной записи используется длинный случайный пароль!
         </template>
 
         <template #form>
             <div class="col-span-6 sm:col-span-4">
-                <JetLabel for="current_password" value="Current Password" />
+                <JetLabel for="current_password" value="Текущий пароль" />
                 <JetInput
                     id="current_password"
                     ref="currentPasswordInput"
@@ -62,7 +62,7 @@ const updatePassword = () => {
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <JetLabel for="password" value="New Password" />
+                <JetLabel for="password" value="Новый пароль" />
                 <JetInput
                     id="password"
                     ref="passwordInput"
@@ -75,7 +75,7 @@ const updatePassword = () => {
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <JetLabel for="password_confirmation" value="Confirm Password" />
+                <JetLabel for="password_confirmation" value="Повторите пароль" />
                 <JetInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"
@@ -89,11 +89,11 @@ const updatePassword = () => {
 
         <template #actions>
             <JetActionMessage :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Сохранено.
             </JetActionMessage>
 
             <JetButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Сохранить
             </JetButton>
         </template>
     </JetFormSection>

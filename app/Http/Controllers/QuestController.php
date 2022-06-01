@@ -286,9 +286,10 @@ class QuestController extends Controller implements QuestControllerI
         if ($skip) {
 
             $replaceKey =  $this->evenRandom ( 0, count($taskArr) - 1 );
+            $skipCorrect = $taskArr[$replaceKey];
             $taskArr[$replaceKey] = '_';
 
-            return [$this->outputTaskAsObject ( implode('', $taskArr) . "=" . $correct, $correct), $correct, $operands];
+            return [$this->outputTaskAsObject ( implode('', $taskArr) . "=" . $correct, $skipCorrect), $skipCorrect, $operands];
 
         // Set ordinary task
         } else {
@@ -313,7 +314,7 @@ class QuestController extends Controller implements QuestControllerI
 
     private function evenRandom ( $min, $max )
     {
-        return ($num = rand($min, $max)) % 2 ? evenRandom ( $min, $max ) : $num;
+        return ($num = rand($min, $max)) % 2 ? $this->evenRandom ( $min, $max ) : $num;
     }
 
 }

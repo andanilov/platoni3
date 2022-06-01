@@ -1,32 +1,37 @@
 <template>
 
+<head-page title="Карта уровней"></head-page>
+
     <wrapper-page :currentUser="currentUser">
 
         <loading v-if="loadingMap"/>
 
         <div v-else>
 
-            <div class="fixed z-40 top-16 left-0 right-0 flex flex-row items-center max-h-full justify-evenly px-4 gap-4 max-w-5xl mx-auto">
+            <div class="fixed z-40 top-16 left-0 right-0 flex flex-row items-center max-h-full justify-between px-4 gap-4 max-w-5xl mx-auto">
 
-                <message class="z-50"
-                v-if="user && allMistakes >= maxMistakes"
-                type="error"
-                title="Исправьте ошибки!">
-                    Для продолжения занятий необходимо исправить накопившиеся ошибки!
-                </message>
+                <div>
+                    <message class="z-50"
+                    v-if="user && allMistakes >= maxMistakes"
+                    type="error"
+                    title="Исправьте ошибки!">
+                        Для продолжения занятий необходимо исправить накопившиеся ошибки!
+                    </message>
 
-                <message class="z-50"
-                v-if="!currentUser"
-                type="info"
-                title="Авторизируйтесь!">
-                    Чтобы получить доступ ко всем занятиям и сохранять прогресс, зарегистрируйтесь и войдите!
-                </message>
+                    <message class="z-50"
+                    v-if="!currentUser"
+                    type="info"
+                    title="Авторизируйтесь!">
+                        Чтобы получить доступ ко всем занятиям и сохранять прогресс, зарегистрируйтесь и войдите!
+                    </message>
+                </div>
 
-                <mistakes-info class="aspect-square"
-                v-if="user && allMistakes"
-                :allMistakes="allMistakes"
-                :maxMistakes="maxMistakes"/>
-
+                <div>
+                    <mistakes-info class="aspect-square"
+                    v-if="user && allMistakes"
+                    :allMistakes="allMistakes"
+                    :maxMistakes="maxMistakes"/>
+                </div>
 
             </div>
 
@@ -56,7 +61,7 @@ import LevelsOutput from '@/components/LevelsOutput'
 import MistakesInfo from '@/components/MistakesInfo'
 import Message from '@/components/Message'
 import Loading from '@/components/Loading'
-
+import HeadPage from '@/components/HeadPage'
 
 const props = defineProps({ user : Object })
 

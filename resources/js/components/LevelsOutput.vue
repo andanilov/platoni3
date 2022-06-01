@@ -47,16 +47,15 @@ const {
     maxMistakes,
 } = useMistakes()
 
-// const noLink = computed(() => allMistakes >= maxMistakes)
 
 const getProgressQuestLevel = quests =>
     quests.length == 1
         ? quests[0].passedNum
-        : quests.reduce( (item1, item2) => item1.passedNum + item2.passedNum )
+        : quests.reduce( (progress, { passedNum }) => progress += passedNum, 0)
 
 
 const getAllQuestsNum = quests =>
     quests.length == 1
         ? quests[0].count
-        : quests.reduce( (item1, item2) => item1.count + item2.count )
+        : quests.reduce( (countAll, { count }) => countAll += count, 0)
 </script>

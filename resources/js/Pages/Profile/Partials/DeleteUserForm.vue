@@ -40,32 +40,32 @@ const closeModal = () => {
 <template>
     <JetActionSection>
         <template #title>
-            Delete Account
+            Удалить Аккаунт
         </template>
 
         <template #description>
-            Permanently delete your account.
+            Навсегда удалить ваш аккаунт и прогресс
         </template>
 
         <template #content>
             <div class="max-w-xl text-sm text-gray-600">
-                Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.
+                После удаления вашей учетной записи все ее данные будут безвозвратно удалены. Перед удалением своей учетной записи загрузите любые данные или информацию, которые вы хотите сохранить.
             </div>
 
             <div class="mt-5">
                 <JetDangerButton @click="confirmUserDeletion">
-                    Delete Account
+                    Удалить Аккаунт
                 </JetDangerButton>
             </div>
 
             <!-- Delete Account Confirmation Modal -->
             <JetDialogModal :show="confirmingUserDeletion" @close="closeModal">
                 <template #title>
-                    Delete Account
+                    Удалить Аккаунт
                 </template>
 
                 <template #content>
-                    Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.
+                    Вы уверены, что хотите удалить свой аккаунт? После удаления вашей учетной записи все ее данные будут безвозвратно удалены. Пожалуйста, введите свой пароль, чтобы подтвердить, что вы хотите навсегда удалить свою учетную запись.
 
                     <div class="mt-4">
                         <JetInput
@@ -83,7 +83,7 @@ const closeModal = () => {
 
                 <template #footer>
                     <JetSecondaryButton @click="closeModal">
-                        Cancel
+                        Отменить
                     </JetSecondaryButton>
 
                     <JetDangerButton
@@ -92,7 +92,7 @@ const closeModal = () => {
                         :disabled="form.processing"
                         @click="deleteUser"
                     >
-                        Delete Account
+                        Удалить Аккаунт
                     </JetDangerButton>
                 </template>
             </JetDialogModal>
