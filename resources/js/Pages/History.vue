@@ -81,7 +81,6 @@ import HeadPage from '@/components/HeadPage'
 const currentUser = ref(computed(() => useGetUser(props.user)))
 computed(() => { useGetUser(props.user) })
 
-
 const props = defineProps({
     user : Object,
     history: Object
@@ -91,7 +90,6 @@ let history = []
 
 // -- Get history for user (no guest)
 history = computed(() => useSort(props.history.original, 'created'))
-
 
 // -- Sorting
 const sortTypes = {
@@ -105,7 +103,5 @@ const srt = (col) => {
     history = useSort(history, col, (sortTypes[col] = !sortTypes[col]))
     currentSort.value = col
 }
-
-
 
 </script>

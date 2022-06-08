@@ -1,9 +1,7 @@
 <template>
-
+<div class="text-[.9rem] sm:text-[1.2rem] lg:text-[1.5rem]">
     <div v-if="currentUser">
-        <dropdown-menu class="max-w-[5rem] sm:max-w-[13rem]
-        text-[.9rem] sm:text-[1.2rem] lg:text-[1.5rem]
-        pt-3 sm:pt-5 lg:pt-7"
+        <dropdown-menu class="max-w-[5rem] sm:max-w-[13rem] pt-3 sm:pt-5 lg:pt-7"
             :title="currentUser.name || currentUser.email"
             side="right">
             <ul class="leading-8">
@@ -14,18 +12,20 @@
         </dropdown-menu>
     </div>
 
-    <div v-else class="pt-3">
+    <div v-else class="pt-3 sm:pt-5 lg:pt-7">
 
         <button @click="registerToggle">
-            <base-icon class="mx-1"
+            <base-icon class="mr-1 sm:mr-4
+            w-7 sm:w-11
+            h-7 sm:h-11"
             name="register"
-            width="24"
             opacity="0.4"/>
         </button>
         <button @click="loginToggle">
-            <base-icon class="mx-1"
+            <base-icon class="mr-1 sm:mr-4
+            w-7 sm:w-10
+            h-7 sm:h-10"
             name="login"
-            width="24"
             opacity="0.4"/>
         </button>
 
@@ -44,7 +44,7 @@
         </modal-win>
 
     </div>
-
+</div>
 </template>
 
 <script setup>
