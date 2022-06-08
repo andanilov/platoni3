@@ -8,10 +8,11 @@
         p-4     sm:p-6
         text-[1rem] sm:text-[1.5rem] lg:text-[2rem]">
 
-            <div class="col-span-9 rounded-lg bg-stone-50 text-stone-600 text-ellipsis overflow-hidden flex items-center justify-center
+            <div class="col-span-9 rounded-lg bg-stone-50 text-stone-600 flex items-center justify-center
             p-4 lg:p-12
             text-[1.5rem] sm:text-[2rem] lg:text-[3rem]">
-                <span class="text-[.8em]">Привет,</span>&nbsp;{{ currentUser ? currentUser.name : 'Незнакомец' }}!
+                <span class="text-[.8em]">Привет,</span>&nbsp;
+                <span class="truncate"> {{ currentUser ? (currentUser.name || currentUser.email) : 'Незнакомец' }}!</span>
             </div>
 
             <grid-card class="col-span-3"
@@ -84,9 +85,6 @@ import HeadPage from '@/components/HeadPage.vue'
 import WrapperPage from '@/components/WrapperPage.vue'
 import GridCard from '@/components/GridCard'
 
-// import { Link } from '@inertiajs/inertia-vue3'
-
-
 const props = defineProps({
     user : Object,
     users : Number,
@@ -102,5 +100,6 @@ const props = defineProps({
 // -- Get and update current user
 const currentUser = ref(computed(() => useGetUser(props.user)))
 computed(() => { useGetUser(props.user) })
+
 </script>
 

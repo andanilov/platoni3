@@ -46,7 +46,7 @@ export function useMistakes(mistakesLoaded = []) {
 
             store.commit('Mistakes/setTime', STORE.time - 1 )
 
-            if(+STORE.time <= 0)
+            if(STORE.time === 0)
                 checkAnswer()
         }, 1000))
 
@@ -156,6 +156,7 @@ export function useMistakes(mistakesLoaded = []) {
         // -- start after loading
         start && setNextTask()
     }
+
 
     return {
         mistakes    : computed( () => STORE.mistakes ),

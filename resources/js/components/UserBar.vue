@@ -2,7 +2,7 @@
 
     <div v-if="currentUser">
         <dropdown-menu
-            :title="currentUser.name ?? currentUser.email"
+            :title="currentUser.name || currentUser.email"
             side="right">
             <ul class="leading-8">
                 <li><Link href="/Profile">Профиль</Link></li>
