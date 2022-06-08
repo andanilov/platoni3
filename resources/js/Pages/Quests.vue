@@ -8,7 +8,9 @@
 
         <div v-else>
 
-            <div class="fixed z-40 top-16 left-0 right-0 flex flex-row items-center max-h-full justify-between px-4 gap-4 max-w-5xl mx-auto">
+            <div class="fixed z-40 left-0 right-0 flex flex-row items-center max-h-full justify-between px-4 gap-4 max-w-5xl mx-auto
+             top-20 sm:top-32 lg:top-36
+            ">
 
                 <div>
                     <message class="z-50"

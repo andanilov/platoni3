@@ -5,6 +5,17 @@
 /* -- Fonts -- */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Merriweather&display=swap');
 
+:root {
+    --font-family: 'Comfortaa', cursive;
+    --main-bg-color: #f9fafb;
+    /* --main-bg-color: black; */
+}
+
+body {
+    font-family: var(--font-family) !important;
+    background-color: var(--main-bg-color);
+}
+
 
 /* --  Flash elements -- */
 .flashing-sharp,
@@ -47,8 +58,8 @@
 /* -- Top menu -- */
 
 .top-navi {
-    padding-top:.7rem;
-    border-top: 4px solid #e5e7eb;
+    /* padding-top:.7rem; */
+    border-top: .4rem solid #e5e7eb;
 }
 
 .top-navi.selected {

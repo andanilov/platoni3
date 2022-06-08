@@ -1,7 +1,9 @@
 <template>
 
     <div v-if="currentUser">
-        <dropdown-menu
+        <dropdown-menu class="max-w-[5rem] sm:max-w-[13rem]
+        text-[.9rem] sm:text-[1.2rem] lg:text-[1.5rem]
+        pt-3 sm:pt-5 lg:pt-7"
             :title="currentUser.name || currentUser.email"
             side="right">
             <ul class="leading-8">

@@ -4,8 +4,7 @@
     :class="{'selected' : currentRoute === '/Profile'}">
         <div class=" flex justify-end gap-1 items-center">
             <span class=" inline-block text-[.6em] text-stone-400">&#9660;</span>
-            <a href="#" class="dropdown-but inline-block truncate
-            max-w-[5rem] sm:max-w-[20rem]">{{ title }}</a>
+            <a href="#" class="dropdown-but inline-block truncate">{{ title }}</a>
         </div>
 
         <div class=" dropdown-body absolute w-min bg-grey shadow-md py-4 px-5 bg-white z-50"
