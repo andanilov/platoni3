@@ -5,31 +5,34 @@
     <wrapper-page :currentUser="currentUser">
         <div class="grid grid-cols-12 tracking-wider
         gap-4   sm:gap-5 lg:gap-8
-        p-4     sm:p-6
-        text-[1rem] sm:text-[1.5rem] lg:text-[2rem]">
+        p-4     sm:p-6">
 
-            <div class="col-span-9 rounded-lg bg-stone-50 text-stone-600 flex items-center justify-center
-            p-4 lg:p-12
-            text-[1.5rem] sm:text-[2rem] lg:text-[3rem]">
+            <div class="col-span-9 rounded-lg bg-white text-stone-600 flex items-center justify-center text-[1em]
+            p-4 lg:p-12">
                 <span class="text-[.8em]">Привет,</span>&nbsp;
                 <span class="truncate"> {{ currentUser ? (currentUser.name || currentUser.email) : 'Незнакомец' }}!</span>
             </div>
 
             <grid-card class="col-span-3"
-                bgColor="#e5e5e5"
-                color="#737373"
+                bgColor="#fef3c7"
+                color="#d97706"
                 :title="String(32 + users)"
-                description="игроков"/>
+                description="игроков"
+                img="img/boy1.png"/>
 
 
             <grid-card class="col-span-3"
-                bgColor="#f1f5f9"
-                color="#64748b"
+                bgColor="#e0f2fe"
+                color="#0369a1"
                 :title="String(levels)"
-                description="уровней"/>
-            <div class=" uppercase col-span-6 rounded-lg bg-lime-500 text-white p-4 flex justify-center items-center animate-pulse">
-                <Link href="/quests" class="text-[1.2rem] sm:text-[1.8rem] lg:text-[2.7rem]">
-                    {{ currentUser ? 'Продолжить' : 'Попробовать' }}
+                description="уровней"
+                img="img/levels.png"/>
+            <div class="animate-pulse col-span-6 rounded-lg bg-lime-500 text-white flex justify-end items-center
+            p-2 sm:p-6 lg:p-10  "
+            style="background: #ecfccb url(img/teaching.png) no-repeat; background-size: contain;">
+                <Link href="/quests" class="text-lime-600
+                text-[1.3em] sm:text-[1.5em]">
+                    {{ currentUser ? 'Далее' : 'Вперёд!' }}
                 </Link>
             </div>
             <grid-card class="col-span-3"
@@ -37,19 +40,20 @@
                 bgColor="#e4e4e7"
                 color="#71717a"
                 :title="String(quests)"
-                description="заданий"/>
+                description="заданий"
+                img="img/tasks.png"/>
 
 
             <grid-card class="col-span-6"
                 v-if="currentUser"
-                bgColor="#d9f99d"
-                color="#65a30d"
+                bgColor="#fff"
+                color="#71717a"
                 :title="String(maxUserLevel)"
                 :description="`текущий\n\rуровень`"/>
             <grid-card class="col-span-6"
                 v-if="currentUser"
-                bgColor="#d9f99d"
-                color="#65a30d"
+                bgColor="#fff"
+                color="#71717a"
                 :title="String(countTasksUsers)"
                 :description="`примеров\n\rпройдено`"/>
 
