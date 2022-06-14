@@ -43,14 +43,16 @@ class QuestsController extends Controller
         // - Get progress for logged user
         if( ($progress = Auth::id() ? $this->questsMap->getUserQuestsProgress(Auth::id()) : false) )
 
-        foreach( $progress as $prog)
+        foreach ($progress as $prog)
             $progressMap[ $prog->level ][ $prog->quest_name ] = [
                 'currentId' => $prog->currentId,
                 'nextId'    => $prog->nextId ?? 0,
                 'passedNum' => $prog->passedNum ?? 0
             ];
+
+
 // echo "<pre>";
-// print_r($progressMap);
+// print_r( $progressMap );
 // echo "</pre>";
 
         // - Set quest map with user progress for front end
@@ -60,7 +62,7 @@ class QuestsController extends Controller
 // echo "<pre>";
 // print_r($currentProgress);
 // echo "</pre>";
-            // -- level chenged
+            // -- level changed
             if( $currLvl != $quests->level ) {
 
                 if( $limQstAfterPassed <= 0 )
@@ -97,6 +99,17 @@ class QuestsController extends Controller
                                 ? $quests->lastId
                                 : $quests->firstId);
 
+            // Get current Quest info
+            $questInfo = $this->questsMap->getQuestLevelsInfoByMapId($qCurrentId);
+            // $progressMap[$prog->level][$prog->quest_name] = $progressMap[$prog->level][$prog->quest_name] + [
+            //     'questLevel' => $nextTaskInfo[0]->level,
+            //     'questMin' => $nextTaskInfo[0]->min,
+            //     'questMax' => $nextTaskInfo[0]->max,
+            //     'questTime' => $nextTaskInfo[0]->time,
+            //     'questCount' => $nextTaskInfo[0]->count,
+            // ];
+
+
             $output[$quests->level][] = [
                 'title'         => $quests->title,
                 'questName'     => $quests->quest_name,
@@ -106,8 +119,18 @@ class QuestsController extends Controller
                 'currentId'     => $qCurrentId,
                 'nextId'        => $qNextId,
                 'passedNum'     => $qPassedNum,
+
+                'questLevel' => $qCurrentId, //$questInfo[0]->level ?? '',
+                'questMin'   => $questInfo[0]->min ?? '',
+                'questMax'   => $questInfo[0]->max ?? '',
+                'questTime'  => $questInfo[0]->time ?? '',
+                'questCount' => $questInfo[0]->count ?? '',
             ];
         }
+
+// echo "<pre>";
+// print_r($output);
+// echo "</pre>";
 
         echo json_encode($output);
     }

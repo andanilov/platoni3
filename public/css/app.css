@@ -891,6 +891,18 @@ select{
 .top-20{
   top: 5rem;
 }
+.-top-2{
+  top: -0.5rem;
+}
+.top-4{
+  top: 1rem;
+}
+.top-1{
+  top: 0.25rem;
+}
+.top-2{
+  top: 0.5rem;
+}
 .z-0{
   z-index: 0;
 }
@@ -1545,13 +1557,13 @@ select{
   --tw-bg-opacity: 1;
   background-color: rgb(250 250 249 / var(--tw-bg-opacity));
 }
-.bg-rose-100{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 228 230 / var(--tw-bg-opacity));
-}
 .bg-amber-100{
   --tw-bg-opacity: 1;
   background-color: rgb(254 243 199 / var(--tw-bg-opacity));
+}
+.bg-rose-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 228 230 / var(--tw-bg-opacity));
 }
 .bg-slate-50{
   --tw-bg-opacity: 1;
@@ -1578,6 +1590,14 @@ select{
 }
 .bg-white\/10{
   background-color: rgb(255 255 255 / 0.1);
+}
+.bg-stone-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(168 162 158 / var(--tw-bg-opacity));
+}
+.bg-stone-200{
+  --tw-bg-opacity: 1;
+  background-color: rgb(231 229 228 / var(--tw-bg-opacity));
 }
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
@@ -1701,6 +1721,10 @@ select{
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
+.px-\[\.2em\]{
+  padding-left: .2em;
+  padding-right: .2em;
+}
 .py-\[\.2em\]{
   padding-top: .2em;
   padding-bottom: .2em;
@@ -1708,6 +1732,18 @@ select{
 .px-8{
   padding-left: 2rem;
   padding-right: 2rem;
+}
+.py-\[\.3em\]{
+  padding-top: .3em;
+  padding-bottom: .3em;
+}
+.px-\[1em\]{
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.px-\[\.8em\]{
+  padding-left: .8em;
+  padding-right: .8em;
 }
 .pt-6{
   padding-top: 1.5rem;
@@ -1835,6 +1871,9 @@ select{
 .text-\[\.9em\]{
   font-size: .9em;
 }
+.text-\[1\.1em\]{
+  font-size: 1.1em;
+}
 .text-\[1em\]{
   font-size: 1em;
 }
@@ -1871,6 +1910,9 @@ select{
 }
 .text-\[1\.3em\]{
   font-size: 1.3em;
+}
+.text-\[\.5em\]{
+  font-size: .5em;
 }
 .font-medium{
   font-weight: 500;
@@ -2208,6 +2250,13 @@ body {
 a.logo .second {
     font-family: 'Caveat', cursive;
 }
+/* Quest map */
+.level-item {
+    opacity: .4;
+}
+.level-item:nth-last-child(-n+2) {
+    opacity: 1;
+}
 /* --  Flash elements -- */
 .flashing-sharp,
 .flash-wrapper span
@@ -2466,6 +2515,15 @@ a.logo .second {
   .sm\:top-32{
     top: 8rem;
   }
+  .sm\:-top-2{
+    top: -0.5rem;
+  }
+  .sm\:top-0{
+    top: 0px;
+  }
+  .sm\:-top-1{
+    top: -0.25rem;
+  }
   .sm\:col-span-4{
     grid-column: span 4 / span 4;
   }
@@ -2669,6 +2727,9 @@ a.logo .second {
   .sm\:text-\[\.6em\]{
     font-size: .6em;
   }
+  .sm\:text-\[1em\]{
+    font-size: 1em;
+  }
   .sm\:text-\[\.7em\]{
     font-size: .7em;
   }
@@ -2683,6 +2744,12 @@ a.logo .second {
   }
   .sm\:text-\[1\.5em\]{
     font-size: 1.5em;
+  }
+  .sm\:text-\[\.5em\]{
+    font-size: .5em;
+  }
+  .sm\:text-\[\.4em\]{
+    font-size: .4em;
   }
   .sm\:leading-\[0\.9em\]{
     line-height: 0.9em;

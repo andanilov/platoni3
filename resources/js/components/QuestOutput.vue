@@ -14,12 +14,37 @@
                     : useGradientSegment( Math.round(quest.passedNum * 100 / quest.count) , '#a3e635', '#f5f5f4')}">
             </div>
 
+            <!-- Quest Info -->
+            <!-- <div v-if="quest.questLevel" class="absolute top-0 right-0 left-0 z-20">
+                <span class="bg-white px-2 py-1 rounded-lg shadow-md
+                text-[.5em] sm:text-[.5em]"
+                :class="{'text-stone-200' : !quest.passedNum }">
+                    Level: {{ quest.questLevel }} <span class="text-[.6em]">/</span>
+                    Min: {{ quest.questMin }} <span class="text-[.6em]">/</span>
+                    Max: {{ quest.questMax }} <span class="text-[.6em]">/</span>
+                    Time: {{ quest.questTime }} <span class="text-[.6em]">/</span>
+                    Count: {{ quest.questCount }}
+                </span>
+            </div> -->
+
+            <!-- Quest Info -->
+            <div v-if="quest.questLevel" class="absolute  left-0 right-0 z-20
+            top-2 sm:-top-1">
+                <span class="py-1 rounded-lg bg-white
+                text-[.7em] sm:text-[.5em]
+                px-3 sm:px-4"
+                :class="{'text-stone-200' : !quest.passedNum }"
+                :style="{ color: quest.passedNum === quest.count ? '#999' : useGetQuestColor(quest.questName).color }">
+                    {{ quest.questCount }}
+                </span>
+            </div>
 
             <!-- Progress numbers -->
             <div class="absolute bottom-0 right-0 left-0 z-20">
                 <span class="bg-white px-2 py-1 rounded-lg shadow-md
-                text-[.9em] sm:text-[.6em]"
-                :class="{'text-stone-200' : !quest.passedNum }">
+                text-[.9em] sm:text-[.7em]"
+                :class="{ 'text-stone-200' : !quest.passedNum }"
+                :style="{ color: quest.passedNum === quest.count ? '#999' : useGetQuestColor(quest.questName).color }">
                     {{ quest.passedNum }} <span class="text-[.6em]">/</span> {{ quest.count }}
                 </span>
             </div>
@@ -32,7 +57,7 @@
                      letterSpacing : '-.2em'}">
 
                 <div class="w-full px-3 font-merriweather flex justify-center items-center aspect-square font-bold"
-                :style="{ color : quest.passedNum === quest.count ? '#ссс' : useGetQuestColor(quest.questName).color,
+                :style="{ color : quest.passedNum === quest.count ? '#999' : useGetQuestColor(quest.questName).color,
                           fontSize : ['', '2.7em', '2.2em', '2em'].find((el, key) => key === quest.title.length) }">
                     {{ quest.title }}
                 </div>
@@ -42,7 +67,7 @@
         </Link>
 
     </div>
-
+<!-- {{ quest }} -->
 </template>
 
 <script setup>

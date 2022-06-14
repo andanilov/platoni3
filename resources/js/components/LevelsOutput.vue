@@ -1,6 +1,6 @@
 <template>
 
-    <div class="relative mx-auto max-w-5xl text-center w-full"
+    <div class="level-item relative mx-auto max-w-5xl text-center w-full"
     v-for="(quests, questsId) in questsModel"
     :key="'quests' + questsId">
 

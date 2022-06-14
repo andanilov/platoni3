@@ -41,6 +41,15 @@ a.logo .second {
     font-family: 'Caveat', cursive;
 }
 
+/* Quest map */
+.level-item {
+    opacity: .4;
+}
+
+.level-item:nth-last-child(-n+2) {
+    opacity: 1;
+}
+
 
 
 /* --  Flash elements -- */
