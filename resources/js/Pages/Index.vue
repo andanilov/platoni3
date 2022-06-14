@@ -58,21 +58,27 @@
                 :description="`примеров\n\rпройдено`"/>
 
 
+            <div class="col-span-6 rounded-xl bg-white text-rose-400 text-ellipsis overflow-hidden text-[.8em]
+            p-4 sm:p-6">
+                <span class="text-[1.3em] pb-6 inline-block underline decoration-1">Детям</span>
+                <p class="inline-block pb-4">&#10004; Играют, решая примеры</p>
 
-            <div class="col-span-12 sm:col-span-6 rounded-xl bg-cyan-50 text-cyan-800 p-4 text-ellipsis overflow-hidden text-center text-[2rem]">
-                <span class="block text-[1.5rem]">Детям</span>
-                <ul class="list-disc text-[1rem] text-left p-6">
-                    <li>Играют, решая примеры</li>
-                    <li>Соревнуются с друзьями</li>
-                </ul>
+                <p>&#10004; Соревнуются с друзьями</p>
             </div>
 
-            <div class="col-span-12 sm:col-span-6 rounded-xl bg-violet-50 text-violet-800 p-4 text-ellipsis overflow-hidden text-center text-[2rem]">
-                <span class="block text-[1.5rem]">Родителям</span>
-                <ul class="list-disc text-[1rem] text-left p-6">
-                    <li>Ежедневные отчёты</li>
-                    <li>Наглядный прогресс обучения</li>
-                </ul>
+            <div class="col-span-6 rounded-xl bg-white text-fuchsia-400 text-ellipsis overflow-hidden text-[.8em]
+            p-4 sm:p-6">
+                <span class="text-[1.3em] pb-6 inline-block underline decoration-1">Родителям</span>
+                <p class="inline-block pb-4">&#10004; Ежедневные отчёты</p>
+
+                <p>&#10004; Наглядный прогресс</p>
+            </div>
+
+            <div class="col-span-12 rounded-xl p-4 text-ellipsis overflow-hidden text-center">
+                <div class="andidandi-logo size3 anim">
+                    <a href="https://andidandi.ru" title="AndiDandi - Разработка сайтов и web-приложений"><span class="big">D</span><small>*</small><small>[</small><span class="big">A</span><span class="big">a</span><small>]</small>ndi</a>
+                    <span>web-development</span>
+                </div>
             </div>
         </div>
 
@@ -106,4 +112,3 @@ const currentUser = ref(computed(() => useGetUser(props.user)))
 computed(() => { useGetUser(props.user) })
 
 </script>
-

@@ -1,6 +1,7 @@
 <template>
 
-    <div class="relative aspect-square w-[7rem] m-1">
+    <div class="relative aspect-square m-1
+    w-[7em] sm:w-[5em]">
 
         <Link :href="noLink ? '' : `/quest/${quest.nextId}`">
 
@@ -16,7 +17,8 @@
 
             <!-- Progress numbers -->
             <div class="absolute bottom-0 right-0 left-0 z-20">
-                <span class="bg-white px-2 py-1 rounded-lg shadow-md text-[.9em]"
+                <span class="bg-white px-2 py-1 rounded-lg shadow-md
+                text-[.9em] sm:text-[.6em]"
                 :class="{'text-stone-200' : !quest.passedNum }">
                     {{ quest.passedNum }} <span class="text-[.6em]">/</span> {{ quest.count }}
                 </span>
@@ -25,14 +27,13 @@
 
             <div class="m-2 relative flex justify-center items-center aspect-square rounded-full align-middle z-10 border-white border-8"
             :style="{ background : quest.passedNum === quest.count
-                    ? '#f2f2f2'
-                    : useGetQuestColor(quest.questName).bgColor}">
+                        ? '#f2f2f2'
+                        : useGetQuestColor(quest.questName).bgColor,
+                     letterSpacing : '-.2em'}">
 
-                <div class="w-full px-3 font-merriweather flex justify-center items-center aspect-square
-                text-[2.5rem] sm:text-[3.5rem]"
-                :style="{ color : quest.passedNum === quest.count
-                    ? '#ссс'
-                    : useGetQuestColor(quest.questName).color}">
+                <div class="w-full px-3 font-merriweather flex justify-center items-center aspect-square font-bold"
+                :style="{ color : quest.passedNum === quest.count ? '#ссс' : useGetQuestColor(quest.questName).color,
+                          fontSize : ['', '2.7em', '2.2em', '2em'].find((el, key) => key === quest.title.length) }">
                     {{ quest.title }}
                 </div>
 

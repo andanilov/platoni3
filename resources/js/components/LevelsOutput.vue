@@ -11,7 +11,8 @@
         :progress="getProgressQuestLevel(quests)"
         :all="getAllQuestsNum(quests)"/>
 
-        <div class="flex flex-wrap justify-center"
+        <div class="flex flex-wrap justify-center
+        gap-1 sm:gap-5"
         :class="{'opacity-50' : questsModel[questsId-1] && (getProgressQuestLevel( questsModel[questsId-1] ) != getAllQuestsNum( questsModel[questsId-1] ) )}">
 
             <quest-output

@@ -24,7 +24,8 @@ class History extends Model
             SUM(`quests_map`.`level`) / COUNT(`quests_users`.`id`) AS `level`,
             (SELECT COUNT(`quests_users_1`.`id`) FROM `quests_users` AS `quests_users_1`
                 WHERE DATE(`quests_users_1`.`created_at`) = DATE(`quests_users`.`created_at`)
-                AND `quests_users_1`.`mistakes_num` < 3)
+                AND `quests_users_1`.`mistakes_num` < 3
+                AND `quests_users_1`.`id_user` = `quests_users`.`id_user`)
                 AS `win`
             FROM `quests_users`, `quests_map`
             WHERE `quests_users`.`id_user` = :id_user
