@@ -1,15 +1,19 @@
 <template>
 
-    <div class=" relative flex w-full justify-between">
+    <div class="relative w-full flex items-center
+    text-[.9em] sm:text-[.7em]">
 
-        <div class="z-10 bg-lime-500 text-white rounded-full px-2 mb-1 text-[.9em]">
+        <div class="z-10 absolute left-0 flex items-center justify-center bg-lime-500 text-white rounded-full aspect-square
+        w-[2.1em] sm:w-[1.8em]">
             {{ passed }}
         </div>
 
-        <progress-line class="z-1 absolute left-2 right-2 h-3 top-[19%]"
+        <progress-line class="z-1 w-full mx-2
+        h-4 sm:h-5"
         :progress="progress"/>
 
-        <div class="z-10 float-right bg-neutral-100 text-neutral-500 rounded-full px-2 mb-1 text-[.9em]">
+        <div class="z-10 absolute right-0 flex items-center justify-center bg-[rgb(225,225,225)] text-neutral-500 rounded-full aspect-square
+        w-[2.1em] sm:w-[1.8em]">
             {{ left }}
         </div>
 

@@ -1,7 +1,5 @@
 <template>
-
-    <div :style="{ background: useGradientProgress( progress ) }"></div>
-
+    <div :style="{ background: useGradientProgress(progress) }"></div>
 </template>
 
 <script setup>

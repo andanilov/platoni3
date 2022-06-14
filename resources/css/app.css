@@ -54,18 +54,17 @@ a.logo .second {
 
 /* --  Flash elements -- */
 .flashing-sharp,
-.flash-wrapper span
-
-{
+.flash-wrapper span,
+#questInput {
     -webkit-animation: flashSharp 1s linear infinite;
     animation: flashSharp 1s linear infinite;
-  }
-  @-webkit-keyframes flashSharp {
+}
+@-webkit-keyframes flashSharp {
     100% { opacity: .0; }
-  }
-  @keyframes flashSharp {
+}
+@keyframes flashSharp {
     100% { opacity: .0 }
-  }
+}
 
 
 /* -- Dropdown menu -- */
@@ -90,11 +89,13 @@ a.logo .second {
     display: block;
   }
 
-
+/* Tables */
+.table-info tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
 
 
 /* -- Top menu -- */
-
 .top-navi {
     border-top: .4rem solid #e5e7eb;
 }

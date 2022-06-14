@@ -4,10 +4,10 @@
         <dropdown-menu class="max-w-[5rem] sm:max-w-[13rem] pt-3 sm:pt-5 lg:pt-7"
             :title="currentUser.name || currentUser.email"
             side="right">
-            <ul class="leading-8">
-                <li><Link href="/Profile">Профиль</Link></li>
+            <ul>
+                <li class="py-2 sm:py-4"><Link href="/Profile">Профиль</Link></li>
                 <li><hr></li>
-                <li><a href="#" @click="out">Выход</a></li>
+                <li class="py-2 sm:py-4"><a href="#" @click="out">Выход</a></li>
             </ul>
         </dropdown-menu>
     </div>

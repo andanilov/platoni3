@@ -2,13 +2,13 @@
 
     <div class="flex flex-row px-2 py-3 w-full justify-center">
 
-        <div class="w-1/10 min-w-fit">
+        <div class="w-1/10 min-w-[4em]">
             <timer
             :time="currentTime"
             :animation="taskStatus === 'wait'"/>
        </div>
 
-        <div class="w-4/5 flex flex-col justify-center items-center px-4">
+        <div class="w-4/5 flex justify-center px-4">
             <progress-bar
             :progress="taskProgress"
             :passed="passed"

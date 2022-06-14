@@ -19,10 +19,10 @@
             Пройдите первый тест, чтобы начать историю!
         </message>
 
-        <table class="w-full text-center mt-5"
+        <table class="w-full text-center mt-5 text-[.8em]"
         v-else>
 
-            <thead class="text-[.7em] border-b-stone-200 border-b-2">
+            <thead class="text-[.8em] border-b-stone-200 border-b-2">
                 <tr>
                     <th class="cursor-pointer" @click="srt('created');">
                         Дата <span class="text-[.8em]">{{ currentSort === 'created' ? ( sortTypes['created'] && '&#9660;' || '&#9650;') : '&nbsp;&nbsp;' }}</span>
@@ -39,20 +39,20 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="table-info">
                 <tr class="border-b-stone-200 border-b-[1px]"
                 v-for="row in history"
                 :key="row.created">
-                    <td class="text-[.8em] py-2">{{ useDateText(row.created) }}</td>
+                    <td class="text-[.8em] py-2 sm:py-4">{{ useDateText(row.created) }}</td>
                     <td>
                         <span class=" text-lime-600">{{ row.win }}</span>
-                        <span class="text-[.8em]"> / </span>
-                        <span class="text-[.9em] text-red-500">{{ row.all - row.win }}</span>
+                        <span class="text-[.7em]"> / </span>
+                        <span class="text-[.8em] text-red-500">{{ row.all - row.win }}</span>
                     </td>
                     <td>
                         <span class="text-lime-600">{{ row.corrects }}</span>
-                        <span class="text-[.8em]"> / </span>
-                        <span class="text-[.9em] text-red-500">{{ row.mistakes }}</span>
+                        <span class="text-[.7em]"> / </span>
+                        <span class="text-[.8em] text-red-500">{{ row.mistakes }}</span>
                     </td>
                     <td>
                         <span class="">{{ Math.trunc(row.level) }}</span>

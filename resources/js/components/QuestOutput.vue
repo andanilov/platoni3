@@ -15,19 +15,6 @@
             </div>
 
             <!-- Quest Info -->
-            <!-- <div v-if="quest.questLevel" class="absolute top-0 right-0 left-0 z-20">
-                <span class="bg-white px-2 py-1 rounded-lg shadow-md
-                text-[.5em] sm:text-[.5em]"
-                :class="{'text-stone-200' : !quest.passedNum }">
-                    Level: {{ quest.questLevel }} <span class="text-[.6em]">/</span>
-                    Min: {{ quest.questMin }} <span class="text-[.6em]">/</span>
-                    Max: {{ quest.questMax }} <span class="text-[.6em]">/</span>
-                    Time: {{ quest.questTime }} <span class="text-[.6em]">/</span>
-                    Count: {{ quest.questCount }}
-                </span>
-            </div> -->
-
-            <!-- Quest Info -->
             <div v-if="quest.questLevel" class="absolute  left-0 right-0 z-20
             top-2 sm:-top-1">
                 <span class="py-1 rounded-lg bg-white

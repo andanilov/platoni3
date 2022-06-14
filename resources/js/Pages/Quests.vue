@@ -28,9 +28,8 @@
                     </message>
                 </div>
 
-                <div>
+                <div v-if="user && allMistakes">
                     <mistakes-info class="aspect-square"
-                    v-if="user && allMistakes"
                     :allMistakes="allMistakes"
                     :maxMistakes="maxMistakes"/>
                 </div>
