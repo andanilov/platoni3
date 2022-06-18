@@ -100,15 +100,7 @@ class QuestsController extends Controller
                                 : $quests->firstId);
 
             // Get current Quest info
-            $questInfo = $this->questsMap->getQuestLevelsInfoByMapId($qCurrentId);
-            // $progressMap[$prog->level][$prog->quest_name] = $progressMap[$prog->level][$prog->quest_name] + [
-            //     'questLevel' => $nextTaskInfo[0]->level,
-            //     'questMin' => $nextTaskInfo[0]->min,
-            //     'questMax' => $nextTaskInfo[0]->max,
-            //     'questTime' => $nextTaskInfo[0]->time,
-            //     'questCount' => $nextTaskInfo[0]->count,
-            // ];
-
+            $questInfo = $this->questsMap->getQuestLevelsInfoByMapId($qNextId);
 
             $output[$quests->level][] = [
                 'title'         => $quests->title,

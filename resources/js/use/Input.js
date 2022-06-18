@@ -42,7 +42,7 @@ console.log($questInput.innerHTML, inputId)
         newInput = newInput === '' ? '_' : newInput
 
         $questInput.innerHTML = newInput
-        store.commit('Input/inputArea', newInput)
+        store.commit('Input/setInputArea', newInput)
     }
 
 

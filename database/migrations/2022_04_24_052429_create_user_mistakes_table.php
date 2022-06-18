@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('id_quests_users');
             $table->string('task', 128);
             $table->float('answer')->nullable();
-            $table->float('correct');
+            $table->float('correct')->nullable();
             $table->dateTime('created_at');
         });
     }

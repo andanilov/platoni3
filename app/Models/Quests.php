@@ -67,9 +67,11 @@ class Quests extends Model
             : [];
     }
 
+
     public function getQuestLevelsInfoByMapId ($idMap)
     {
         return DB::select("SELECT
+                        `quest_levels_templates`.`id`,
                         `quest_levels_templates`.`level`,
                         `quest_levels_templates`.`min`,
                         `quest_levels_templates`.`max`,
