@@ -30,8 +30,8 @@
             <div class="animate-pulse col-span-6 rounded-lg bg-lime-500 text-white flex justify-end items-center
             p-2 sm:p-6 lg:p-10  "
             style="background: #ecfccb url(img/teaching.png) no-repeat; background-size: contain;">
-                <Link href="/quests" class="text-lime-600
-                text-[1.3em] sm:text-[1.5em]">
+                <Link href="/quests" class="text-lime-600 bg-[#ecfccb]
+                text-[1.3em] sm:text-[1.5em] pl-2">
                     {{ currentUser ? 'Далее' : 'Вперёд!' }}
                 </Link>
             </div>

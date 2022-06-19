@@ -1,45 +1,42 @@
 <template>
 
-<div class="grid grid-cols-2 text-center">
+<div class="task-finished">
 
-    <div class="col-span-2 w-full flex items-center justify-center font-bold tracking-wider
-    h-[30vh] uppercase">
-        <span class="text-amber-400  text-[3rem]">
+    <div class="task-finished__title tracking-wider uppercase bg-white">
+        <span class="text-stone-600 text-[4vh] animate-pulse">
             Работа над ошибками
         </span>
     </div>
 
-
-
-    <div class="bg-stone-50 aspect-square flex items-center text-lime-600 rounded-xl font-bold ml-6 mr-4 mb-6">
-        <div class="text-[5rem] w-full leading-none">
+    <div class="task-finished__successful info bg-lime-100 text-lime-600 text-[12vh]">
+        <div>
             {{ corrected.length }}
-            <div class="text-[1rem] uppercase tracking-wider">Исправлено</div>
+            <div class="text-[.3em]">Исправлено</div>
         </div>
     </div>
 
-
-    <div class="bg-stone-50 aspect-square flex items-center text-red-500 rounded-xl font-bold ml-6 mr-4 mb-6">
-        <div class="text-[5rem] w-full leading-none">
+    <div class="task-finished__unsuccessful info bg-red-100 text-red-600 text-[12vh]">
+        <div>
             {{ allMistakes - corrected.length }}
-            <div class="text-[1rem] uppercase tracking-wider">Осталось</div>
+            <div class="text-[.3em]">Осталось</div>
         </div>
+
     </div>
 
-    <div class="px-3">
-        <but type="info" class="w-full"
-        @click="goToMap()" >На карту</but>
+    <div class="task-finished__buttons">
+
+        <but type="info"
+            @click="goToMap()">
+                На карту
+        </but>
+
+        <but v-if="corrected.length < allMistakes" type="warning"
+            @click="goToRepeatMistakesQuest()">
+                Ещё раз
+        </but>
+
     </div>
-
-    <div class="px-3"
-    v-if="corrected.length < allMistakes">
-        <but type="warning" class="w-full"
-        @click="goToRepeatMistakesQuest()">Ещё раз</but>
-    </div>
-
-
 </div>
-
 
 </template>
 

@@ -2,7 +2,7 @@
 
 <head-page title="Работа над ошибками"></head-page>
 
-<div class="max-w-3xl mx-auto p-3">
+<div class="max-w-3xl min-w-[360px] mx-auto pt-[1vh]">
 
     <loading v-if="taskStatus === 'loading'"/>
 

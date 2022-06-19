@@ -1,6 +1,7 @@
 <template>
 
-<button class="m-2 rounded-lg py-2 shadow-sm text-[1.5rem] uppercase tracking-wider text-white"
+<button class="m-[1vh] rounded-lg shadow-sm uppercase text-white
+py-[1vh] text-[3vh] tracking-widest"
 :class="{
     'bg-gradient-to-tr from-lime-500  to-lime-400  shadow-lime-500/50' : type === 'ok',
     'bg-gradient-to-tr from-stone-200  to-stone-50 text-black shadow-gray-500/50' : type === 'info',
@@ -9,7 +10,6 @@
 }">
     <slot/>
 </button>
-
 
 </template>
 

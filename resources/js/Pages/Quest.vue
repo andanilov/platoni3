@@ -2,20 +2,20 @@
 
 <head-page title="Тестирование"></head-page>
 
-<div class="max-w-3xl mx-auto p-3">
+<div class="max-w-3xl min-w-[360px] mx-auto px-3 pt-[1vh]">
 
     <loading v-if="taskStatus === 'loading'"/>
 
     <task-finished v-else-if="taskStatus === 'finished'"/>
 
     <div v-else>
-        <quest-panel/>
+        <quest-panel class="quest-panel"/>
 
         <input-area
         :taskStr="currentTask.task"
         :taskStatus="taskStatus"/>
 
-        <check-quest/>
+        <check-quest class="check-quest"/>
     </div>
 
 </div>

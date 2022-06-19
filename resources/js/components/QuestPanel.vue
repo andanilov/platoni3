@@ -1,6 +1,7 @@
 <template>
 
-    <div class="flex flex-row px-2 py-3 w-full justify-center">
+    <div class="flex flex-row px-2 pt-3 w-full justify-center
+    text-[3vh] landscape:text-[3.5vh]">
 
         <div class="w-1/10 min-w-[4em]">
             <timer

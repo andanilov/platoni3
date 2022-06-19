@@ -1,15 +1,12 @@
 <template>
 
-    <div class="grid mx-auto mt-5 px-5
-    w-full
-    sm:w-[50%]
-    ">
-        <but
+    <div class="grid mx-auto px-5 w-full pt-[2vh]">
+        <but class="w-[100%] landscape:w-[50%] mx-auto"
         v-if="taskStatus != 'right' && taskStatus != 'wrong'"
         type="ok"
         @click="checkAnswer()">Ответить</but>
 
-        <but
+        <but class="w-[100%] landscape:w-[50%] mx-auto"
         v-else
         :type="taskStatus === 'right' ? 'ok' : 'error'"
         @click="setNextTask()">Далее</but>

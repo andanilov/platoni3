@@ -4,6 +4,7 @@ const Input = {
 
     state : () => ({
         inputArea : '',
+        maxAnswerLen : 6,
     }),
 
     mutations : {

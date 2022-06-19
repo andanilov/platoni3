@@ -6,7 +6,8 @@
 
         <screen-hidden v-if="allMistakes >= maxMistakes" zIndex="40"/>
 
-        <div class="relative aspect-square m-1 flex z-40 w-[4rem]"
+        <div class="relative aspect-square m-1 z-40 flex
+        w-[6em] sm:w-[4em]"
         :class="{'animate-pulse' : allMistakes >= maxMistakes}">
 
             <!-- Progress circle -->
@@ -14,12 +15,14 @@
 
             :style="allMistakes >= maxMistakes
                         ? 'background: red'
-                        : 'background: ' + useGradientSegment( Math.round(allMistakes * 100 / maxMistakes) , '#dc2626')">
+                        : 'background: ' + useGradientSegment( Math.round(allMistakes * 100 / maxMistakes), '#dc2626', '#f2f2f2')">
             </div>
 
             <!-- <div class="relative flex place-items-center rounded-full z-10 border-white border-8 aspect-square">&nbsp; -->
-            <div class="m-1 relative flex justify-center items-center rounded-full z-10 bg-red-400 border-4 border-white aspect-square
-            text-[1.5rem] sm:text-[2rem] text-white">
+            <div class="m-2 flex justify-center items-center rounded-full z-10 bg-red-400 border-white aspect-square
+            text-[3em] sm:text-[2em] text-white
+            pt-[0.2em] sm:pt-[0.2em]
+            border-8 sm:border-6">
                 {{ allMistakes }}
             </div>
 

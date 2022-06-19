@@ -6,6 +6,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Merriweather&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
+/* -- Including -- */
+@import 'quest-finished.css';
+
+
 :root {
     --font-family: 'Comfortaa', cursive;
     --main-bg-color: #f9fafb;

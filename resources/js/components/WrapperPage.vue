@@ -1,5 +1,5 @@
 <template>
-    <div class="relative max-w-5xl mx-auto">
+    <div class="relative mx-auto max-w-[1024px]">
         <nav-bar/>
         <!-- <div class="pt-16 sm:pt-32 lg:pt-50 ">&nbsp;</div> -->
         <slot/>

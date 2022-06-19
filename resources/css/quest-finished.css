@@ -1,0 +1,30 @@
+.task-finished {
+    display: grid;
+    height: 99vh;
+    text-align: center;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 2fr 2fr repeat(2, 1fr);
+    grid-template-areas:
+        "tfTitle tfTitle"
+        "tfSuccessful tfUnsuccessful"
+        "tfInfo tfInfo"
+        "tfButtons tfButtons";
+
+}
+
+.task-finished > div {
+    display: grid;
+    align-items: center;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.task-finished .info {
+    display: grid;
+}
+
+.task-finished__title { grid-area: tfTitle; }
+.task-finished__successful { grid-area: tfSuccessful; }
+.task-finished__unsuccessful { grid-area: tfUnsuccessful; }
+.task-finished__info { grid-area: tfInfo; }
+.task-finished__buttons { grid-area: tfButtons; }

@@ -20,12 +20,12 @@ export function useInput() {
 
         const $questInput = document.getElementById(inputId)
 
-console.log($questInput.innerHTML, inputId)
+        if (!$questInput?.innerText.length || $questInput.innerText.length >= STORE.maxAnswerLen)
+            return false
 
         $questInput.innerHTML = $questInput.innerHTML === '_' ? symbol : $questInput.innerHTML + symbol
         store.commit('Input/setInputArea', $questInput.innerHTML)
     }
-
 
 
 
