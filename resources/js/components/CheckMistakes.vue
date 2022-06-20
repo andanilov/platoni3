@@ -2,18 +2,18 @@
 
     <div class="grid mx-auto px-5 w-full pt-[1vh]">
 
-        <but class="w-[100%] landscape:w-[60%] mx-auto"
+        <but class="w-[100%] landscape:w-[70%] mx-auto"
         v-if="taskStatus === 'wrong' || taskStatus === 'right'"
         :type="taskStatus === 'right' ? 'ok' : 'error'"
         @click="setNextTask()">Далее</but>
 
-        <but class="w-[100%] landscape:w-[60%] mx-auto"
+        <but class="w-[100%] landscape:w-[70%] mx-auto"
         v-if="taskStatus === 'wrong' || taskStatus === 'right'"
         type="warning"
         @click.prevent
         @click="finishedTask()">Сохранить и выйти</but>
 
-        <but class="w-[100%] landscape:w-[60%] mx-auto"
+        <but class="w-[100%] landscape:w-[70%] mx-auto"
         v-else
         type="ok"
         @click="checkAnswer()">Ответить</but>

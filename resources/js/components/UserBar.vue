@@ -8,6 +8,8 @@
                 <li class="py-2 sm:py-4"><Link href="/Profile">Профиль</Link></li>
                 <li><hr></li>
                 <li class="py-2 sm:py-4"><a href="#" @click="out">Выход</a></li>
+                <!-- <li><hr></li>
+                <li class="py-2 sm:py-4">{{ vw }} x {{ vh }}</li> -->
             </ul>
         </dropdown-menu>
     </div>
@@ -69,4 +71,8 @@ const out = () => {
     Inertia.post(route('logout') )
     loginShow.value = registerShow.value = false
 }
+
+const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
 </script>
