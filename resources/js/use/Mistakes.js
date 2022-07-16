@@ -15,6 +15,14 @@ export function useMistakes(mistakesLoaded = []) {
 
     const { addToGoBackQueue } = useGoBack()
 
+    const visualFilter = { '*' : '×' }
+
+    // --- Task visual filter
+    const tasksVisualFilter = (tasks) => tasks.map(({ task, ...params }) => ({
+            ...params,
+            task: Array.from(task).map((symbol) => visualFilter[symbol] ?? symbol).join('')
+        }));
+
 
     // -- Set next task
     const setNextTask = () => {
@@ -148,7 +156,7 @@ export function useMistakes(mistakesLoaded = []) {
         }
 
         // -- set mistakes to STORE
-        store.commit('Mistakes/setMistakes', mistakesLoaded)
+        store.commit('Mistakes/setMistakes', tasksVisualFilter(mistakesLoaded))
 
         // -- set All mistakes number
         store.commit('Mistakes/setAllMistakes', mistakesLoaded.length)

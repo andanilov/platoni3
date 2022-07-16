@@ -15,6 +15,14 @@ export function useQuest(initQuest = false) {
     const { deleteInput, setInputStr } = useInput()
     const { response, request, loading } = useFetchPost()
 
+    const visualFilter = { '*' : '×' }
+
+    // --- Task visual filter
+    const tasksVisualFilter = (tasks) => tasks.map(({ task, ...params }) => ({
+            ...params,
+            task: Array.from(task).map((symbol) => visualFilter[symbol] ?? symbol).join('')
+        }));
+
 
     // --- Methods ---
 
@@ -27,11 +35,10 @@ export function useQuest(initQuest = false) {
             const currentTask = tasks.shift()
 
             store.commit('Quest/setCurrentTask', currentTask)
-            // store.commit('Quest/setInputArea', currentTask.task)
             store.commit('Quest/setTasks', tasks)
 
             // Clear input area
-            setInputStr(currentTask.task)
+            setInputStr(currentTask.task, true)
 
             // Start timer
             timerStart()
@@ -150,7 +157,7 @@ export function useQuest(initQuest = false) {
         store.commit('Quest/setTime', questModel.time)
 
         // -- Tasks
-        store.commit('Quest/setTasks', questModel.tasks)
+        store.commit('Quest/setTasks', tasksVisualFilter(questModel.tasks))
 
         // -- Tasks count
         store.commit('Quest/setTasksCount', questModel.tasks.length)

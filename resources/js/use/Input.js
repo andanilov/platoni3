@@ -9,8 +9,10 @@ export function useInput() {
 
 
     // -- Get input str
-    const setInputStr = (task = '') =>
-        task.replace('_', `<span id="${inputId}">_</span>`)
+    const setInputStr = (task = '', clear = false) => {
+        clear && document.getElementById(inputId) && (document.getElementById(inputId).innerText = '_')
+        return task.replace('_', `<span id="${inputId}">_</span>`)
+    }
 
 
 

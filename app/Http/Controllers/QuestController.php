@@ -100,7 +100,6 @@ class QuestController extends Controller implements QuestControllerI
 
         $result = [];
 
-
         // - From random min to random max by step 3+5 -> 7+45
         $stepMax = ceil( ($params->max - $params->min) / $params->count );
         $stepMin = round( $stepMax / 2 );
@@ -119,27 +118,21 @@ class QuestController extends Controller implements QuestControllerI
                 ? $currentMin + $stepMin
                 : $currentMin;
 
-            // echo "min={$currentMin} max={$currentMax} stepMin={$stepMin} stepMax={$stepMax}<br/>";
+            $attemptFindUnicumTask = 5; // Attempt to find unicum task
+            $allAttempts = 20;
 
             try {
-
-                // Attempts to get unique task
-                $attempt = 10;
-
-                // Get task
                 do {
-
                     [$res, $correct, $operands] = call_user_func_array( [$this, $params->quest_name], ['min' => $currentMin, 'max' => $currentMax] );
 
                 // Repeat try to generate
                 } while (
-
-                    ( in_array($res, $result) // Task already exists
-                    || (!$negative_enable && $correct < 0) // If negativ acorrect (and not enable)
-                    || (count(array_unique($operands)) < count($operands)) ) // Repeat operands
-
-                    // Maximum attempts
-                    && --$attempt > 0
+                    (
+                        (--$attemptFindUnicumTask > 0 && in_array($res, $result)) // Task already exists
+                        || (!$negative_enable && $correct < 0) // If negativ acorrect (and not enable)
+                        || (count($result) && $result[count($result) - 1] == $res) // If repeat previous task
+                        // || (count(array_unique($operands)) < count($operands)) // Repeat operands
+                    ) && --$allAttempts > 0
                 );
 
                 // Set task
